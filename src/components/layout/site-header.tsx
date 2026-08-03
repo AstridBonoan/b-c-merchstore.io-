@@ -53,7 +53,7 @@ export function SiteHeader() {
             : "border-transparent bg-[#f4f4f2]",
         )}
       >
-        <Container className="flex h-16 items-center gap-3 sm:h-20 sm:gap-4">
+        <Container className="flex h-16 items-center justify-between gap-4 sm:h-20">
           <Link
             href="/"
             className="inline-flex shrink-0 items-center"
@@ -68,10 +68,7 @@ export function SiteHeader() {
             />
           </Link>
 
-          <nav
-            className="hidden items-center gap-6 lg:flex"
-            aria-label="Primary"
-          >
+          <nav className="hidden items-center gap-8 md:flex" aria-label="Primary">
             {NAV_LINKS.map((link) => {
               const active =
                 pathname === link.href || pathname.startsWith(`${link.href}/`);
@@ -91,13 +88,12 @@ export function SiteHeader() {
             })}
           </nav>
 
-          <div className="ml-auto flex min-w-0 flex-1 items-center justify-end gap-1 sm:gap-2 md:max-w-none lg:ml-0 lg:max-w-md lg:flex-none">
-            <NavSearch className="hidden w-full max-w-xs md:flex lg:max-w-sm" />
-
+          <div className="flex shrink-0 items-center gap-1 sm:gap-2">
+            <NavSearch className="hidden w-44 sm:flex md:w-52 lg:w-64" />
             <Link
               href="/account"
               aria-label="Account"
-              className="hidden size-10 shrink-0 items-center justify-center rounded-md text-[#0c0c0c]/80 transition-colors hover:bg-[#0c0c0c]/5 hover:text-[#0c0c0c] sm:inline-flex"
+              className="hidden size-10 items-center justify-center rounded-md text-[#0c0c0c]/80 transition-colors hover:bg-[#0c0c0c]/5 hover:text-[#0c0c0c] sm:inline-flex"
             >
               <User className="size-[18px]" aria-hidden="true" />
             </Link>
@@ -105,7 +101,7 @@ export function SiteHeader() {
               type="button"
               onClick={toggleCart}
               aria-label={`Open bag${itemCount > 0 ? `, ${itemCount} items` : ""}`}
-              className="relative inline-flex size-10 shrink-0 items-center justify-center rounded-md text-[#0c0c0c]/80 transition-colors hover:bg-[#0c0c0c]/5 hover:text-[#0c0c0c]"
+              className="relative inline-flex size-10 items-center justify-center rounded-md text-[#0c0c0c]/80 transition-colors hover:bg-[#0c0c0c]/5 hover:text-[#0c0c0c]"
             >
               <ShoppingBag className="size-[18px]" aria-hidden="true" />
               {itemCount > 0 ? (
@@ -119,7 +115,7 @@ export function SiteHeader() {
               onClick={() => setMobileOpen(true)}
               aria-label="Open menu"
               aria-expanded={mobileOpen}
-              className="inline-flex size-10 shrink-0 items-center justify-center rounded-md text-[#0c0c0c]/80 transition-colors hover:bg-[#0c0c0c]/5 hover:text-[#0c0c0c] md:hidden"
+              className="inline-flex size-10 items-center justify-center rounded-md text-[#0c0c0c]/80 transition-colors hover:bg-[#0c0c0c]/5 hover:text-[#0c0c0c] md:hidden"
             >
               <Menu className="size-[18px]" aria-hidden="true" />
             </button>
