@@ -1,0 +1,6 @@
+1:"$Sreact.fragment"
+2:I[30709,["/b-c-merchstore.io-/_next/static/chunks/05-c3ty_6dwfk.js","/b-c-merchstore.io-/_next/static/chunks/14mrh2-p_w84d.js","/b-c-merchstore.io-/_next/static/chunks/34tp5s4bmj82t.js","/b-c-merchstore.io-/_next/static/chunks/27i09j5eylvkc.js","/b-c-merchstore.io-/_next/static/chunks/3lew619dayfgq.js","/b-c-merchstore.io-/_next/static/chunks/0svw0mx9-saj0.js"],"CartView"]
+3:I[97367,["/b-c-merchstore.io-/_next/static/chunks/05-c3ty_6dwfk.js","/b-c-merchstore.io-/_next/static/chunks/14mrh2-p_w84d.js"],"OutletBoundary"]
+4:"$Sreact.suspense"
+0:{"rsc":["$","$1","c",{"children":[["$","div",null,{"className":"mx-auto w-full max-w-7xl px-5 sm:px-8 lg:px-10 py-10 md:py-16","children":[["$","div",null,{"className":"mb-8 md:mb-12","children":[["$","p",null,{"className":"text-xs font-medium uppercase tracking-[0.2em] text-[#0d5c63]","children":"Bag"}],["$","h1",null,{"className":"mt-2 font-display text-3xl font-bold tracking-tight md:text-4xl","children":"Your cart"}]]}],["$","$L2",null,{}]]}],[["$","script","script-0",{"src":"/b-c-merchstore.io-/_next/static/chunks/0svw0mx9-saj0.js","async":true}]],["$","$L3",null,{"children":["$","$4",null,{"name":"Next.MetadataOutlet","children":"$@5"}]}]]}],"isPartial":false,"staleTime":300,"varyParams":null,"buildId":"dZeU7jxZNdCt3mYIxKRj8"}
+5:null
