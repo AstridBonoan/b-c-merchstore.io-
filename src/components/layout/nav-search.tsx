@@ -1,7 +1,7 @@
 "use client";
 
 import * as React from "react";
-import { usePathname, useSearchParams } from "next/navigation";
+import { usePathname } from "next/navigation";
 import { Search } from "lucide-react";
 import { withBasePath } from "@/lib/paths";
 import { cn } from "@/lib/utils";
@@ -13,13 +13,9 @@ type NavSearchProps = {
   onNavigate?: () => void;
 };
 
-function buildShopSearchHref(
-  query: string,
-  currentParams: URLSearchParams,
-  preserveFilters: boolean,
-) {
-  const params = preserveFilters
-    ? new URLSearchParams(currentParams.toString())
+function buildShopSearchHref(query: string, currentSearch: string, onShop: boolean) {
+  const params = onShop
+    ? new URLSearchParams(currentSearch)
     : new URLSearchParams();
 
   const q = query.trim();
@@ -30,34 +26,29 @@ function buildShopSearchHref(
   return qs ? `/shop/?${qs}` : "/shop/";
 }
 
-function NavSearchForm({
+/**
+ * Header search without useSearchParams — avoids Suspense CSR bailouts that
+ * can crash Next's global error UI on static GitHub Pages navigations.
+ */
+export function NavSearch({
   className,
   inputClassName,
   autoFocus,
   onNavigate,
 }: NavSearchProps) {
   const pathname = usePathname();
-  const searchParams = useSearchParams();
   const inputId = React.useId();
   const onShop =
     pathname === "/shop" ||
     pathname === "/shop/" ||
     pathname.startsWith("/shop/");
 
-  const urlSearch = searchParams.get("search") ?? "";
-  const [value, setValue] = React.useState(urlSearch);
-  const [prevUrlSearch, setPrevUrlSearch] = React.useState(urlSearch);
-
-  // Keep the field aligned with the URL when search changes from elsewhere.
-  if (urlSearch !== prevUrlSearch) {
-    setPrevUrlSearch(urlSearch);
-    setValue(urlSearch);
-  }
+  const [value, setValue] = React.useState("");
 
   function goToResults(rawQuery: string) {
-    const href = buildShopSearchHref(rawQuery, searchParams, onShop);
-    // Full navigation so query changes always apply on static GitHub Pages,
-    // including when already on /shop with a previous search.
+    const currentSearch =
+      typeof window !== "undefined" ? window.location.search : "";
+    const href = buildShopSearchHref(rawQuery, currentSearch, onShop);
     window.location.assign(withBasePath(href));
     onNavigate?.();
   }
@@ -98,24 +89,5 @@ function NavSearchForm({
         <Search className="size-4" aria-hidden="true" />
       </button>
     </form>
-  );
-}
-
-/** Header/mobile search that navigates to `/shop/?search=…` results. */
-export function NavSearch(props: NavSearchProps) {
-  return (
-    <React.Suspense
-      fallback={
-        <div
-          className={cn(
-            "h-10 w-full max-w-xs animate-pulse rounded-md bg-[#0c0c0c]/5",
-            props.className,
-          )}
-          aria-hidden="true"
-        />
-      }
-    >
-      <NavSearchForm {...props} />
-    </React.Suspense>
   );
 }
