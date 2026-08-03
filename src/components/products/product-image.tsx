@@ -2,6 +2,7 @@
 
 import * as React from "react";
 import Image, { type ImageProps } from "next/image";
+import { withBasePath } from "@/lib/paths";
 
 export interface ProductImageProps extends Omit<ImageProps, "onError" | "src"> {
   src: string;
@@ -10,8 +11,8 @@ export interface ProductImageProps extends Omit<ImageProps, "onError" | "src"> {
 }
 
 /**
- * Wraps next/image with a branded gradient fallback for the seed catalog's
- * placeholder image paths, so the storefront never shows a broken-image icon.
+ * Wraps next/image with a branded gradient fallback and GitHub Pages basePath support.
+ * Next static export does not always prefix public asset URLs with basePath.
  */
 export function ProductImage({
   src,
@@ -21,6 +22,7 @@ export function ProductImage({
   ...props
 }: ProductImageProps) {
   const [errored, setErrored] = React.useState(false);
+  const resolvedSrc = withBasePath(src);
 
   if (errored) {
     return (
@@ -38,10 +40,11 @@ export function ProductImage({
 
   return (
     <Image
-      src={src}
+      src={resolvedSrc}
       alt={alt}
       className={className}
       onError={() => setErrored(true)}
+      unoptimized
       {...props}
     />
   );

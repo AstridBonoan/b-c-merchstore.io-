@@ -3,6 +3,7 @@
 import * as React from "react";
 import Image from "next/image";
 import { cn } from "@/lib/utils";
+import { withBasePath } from "@/lib/paths";
 
 const FALLBACK_SRC = "/images/placeholder.svg";
 
@@ -16,7 +17,7 @@ export interface ThumbnailImageProps {
 /** Product/order thumbnail that quietly falls back to a placeholder if the seed asset 404s. */
 export function ThumbnailImage({ src, alt, className, size = 40 }: ThumbnailImageProps) {
   const [errored, setErrored] = React.useState(false);
-  const resolvedSrc = !src || errored ? FALLBACK_SRC : src;
+  const resolvedSrc = withBasePath(!src || errored ? FALLBACK_SRC : src);
 
   return (
     <div
@@ -31,7 +32,11 @@ export function ThumbnailImage({ src, alt, className, size = 40 }: ThumbnailImag
         alt={alt}
         fill
         sizes={`${size}px`}
-        className={cn("object-cover", resolvedSrc === FALLBACK_SRC && "object-contain p-1.5 opacity-40")}
+        unoptimized
+        className={cn(
+          "object-cover",
+          resolvedSrc.endsWith("placeholder.svg") && "object-contain p-1.5 opacity-40",
+        )}
         onError={() => setErrored(true)}
       />
     </div>

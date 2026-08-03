@@ -2,9 +2,9 @@
 
 import * as React from "react";
 import Link from "next/link";
-import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { Menu, Search, ShoppingBag, User, X } from "lucide-react";
+import { BrandLogo } from "@/components/brand/brand-logo";
 import { Container } from "@/components/layout/container";
 import { Sheet, SheetContent, SheetHeader, SheetTitle } from "@/components/ui/sheet";
 import { Button } from "@/components/ui/button";
@@ -58,14 +58,7 @@ export function SiteHeader() {
             className="inline-flex items-center rounded-md bg-[#0c0c0c] px-2 py-1.5"
             aria-label="B&C Merch Store home"
           >
-            <Image
-              src="/images/brand/bc-logo.png"
-              alt="B&C"
-              width={120}
-              height={40}
-              className="h-6 w-auto sm:h-7"
-              priority
-            />
+            <BrandLogo width={120} height={40} priority className="h-6 w-auto sm:h-7" />
           </Link>
 
           <nav className="hidden items-center gap-8 md:flex" aria-label="Primary">
@@ -132,9 +125,7 @@ export function SiteHeader() {
         <SheetContent side="left" className="flex w-full max-w-xs flex-col gap-8">
           <SheetHeader className="flex-row items-center justify-between space-y-0">
             <SheetTitle className="sr-only">B&C menu</SheetTitle>
-            <Image
-              src="/images/brand/bc-logo.png"
-              alt="B&C"
+            <BrandLogo
               width={100}
               height={34}
               className="h-7 w-auto rounded-sm bg-[#0c0c0c]"

@@ -1,6 +1,6 @@
 import Link from "next/link";
-import Image from "next/image";
 import { ArrowRight } from "lucide-react";
+import { BrandLogo } from "@/components/brand/brand-logo";
 import { Container } from "@/components/layout/container";
 import { buttonVariants } from "@/components/ui/button";
 
@@ -22,14 +22,7 @@ export function Hero() {
         </span>
         <h1 className="animate-fade-up animate-delay-100 sr-only">B&C Merch Store</h1>
         <div className="animate-fade-up animate-delay-100 w-full max-w-3xl">
-          <Image
-            src="/images/brand/bc-logo.png"
-            alt="B&C"
-            width={960}
-            height={320}
-            priority
-            className="h-auto w-full"
-          />
+          <BrandLogo width={960} height={320} priority className="h-auto w-full" />
         </div>
         <div className="animate-fade-up animate-delay-200 flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between">
           <p className="max-w-md text-lg text-[#f4f4f2]/75 sm:text-xl">

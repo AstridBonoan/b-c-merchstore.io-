@@ -1,5 +1,5 @@
 import Link from "next/link";
-import Image from "next/image";
+import { BrandLogo } from "@/components/brand/brand-logo";
 import { Container } from "@/components/layout/container";
 import { NewsletterForm } from "@/components/forms/newsletter-form";
 
@@ -30,13 +30,7 @@ export function SiteFooter() {
       <Container className="grid gap-12 py-16 sm:py-20 lg:grid-cols-[1.4fr_1fr_1fr_1.2fr]">
         <div className="flex flex-col gap-4">
           <Link href="/" className="inline-flex w-fit" aria-label="B&C Merch Store home">
-            <Image
-              src="/images/brand/bc-logo.png"
-              alt="B&C"
-              width={160}
-              height={54}
-              className="h-10 w-auto"
-            />
+            <BrandLogo width={160} height={54} className="h-10 w-auto" />
           </Link>
           <p className="max-w-xs text-sm text-[#f4f4f2]/60">
             Wear the brand. Build the culture. Premium streetwear essentials made for
