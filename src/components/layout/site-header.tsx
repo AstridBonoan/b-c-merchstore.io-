@@ -55,10 +55,16 @@ export function SiteHeader() {
         <Container className="flex h-16 items-center justify-between sm:h-20">
           <Link
             href="/"
-            className="inline-flex items-center rounded-md bg-[#0c0c0c] px-2 py-1.5"
+            className="inline-flex items-center"
             aria-label="B&C Merch Store home"
           >
-            <BrandLogo width={120} height={40} priority className="h-6 w-auto sm:h-7" />
+            <BrandLogo
+              variant="light"
+              width={120}
+              height={40}
+              priority
+              className="h-7 w-auto sm:h-8"
+            />
           </Link>
 
           <nav className="hidden items-center gap-8 md:flex" aria-label="Primary">
@@ -126,9 +132,10 @@ export function SiteHeader() {
           <SheetHeader className="flex-row items-center justify-between space-y-0">
             <SheetTitle className="sr-only">B&C menu</SheetTitle>
             <BrandLogo
+              variant="light"
               width={100}
               height={34}
-              className="h-7 w-auto rounded-sm bg-[#0c0c0c]"
+              className="h-7 w-auto"
             />
           </SheetHeader>
           <nav className="flex flex-col gap-1" aria-label="Mobile">
