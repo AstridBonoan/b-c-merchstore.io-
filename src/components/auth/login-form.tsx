@@ -45,7 +45,7 @@ export function LoginForm() {
             AC
           </span>
           <span className="text-base font-semibold text-[#0c0c0c]">
-            A&C Merch Store
+            B&C Merch Store
           </span>
         </Link>
         <h1 className="mt-4 text-xl font-semibold text-[#0c0c0c]">Sign in</h1>

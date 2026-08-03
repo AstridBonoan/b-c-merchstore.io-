@@ -20,7 +20,7 @@ export function Hero() {
           Fall Collection — Now Live
         </span>
         <h1 className="animate-fade-up animate-delay-100 font-display text-[15vw] font-extrabold leading-[0.92] tracking-tight sm:text-[9vw] lg:text-[7.5vw]">
-          A&amp;C
+          B&amp;C
         </h1>
         <div className="animate-fade-up animate-delay-200 flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between">
           <p className="max-w-md text-lg text-[#f4f4f2]/75 sm:text-xl">

@@ -22,25 +22,25 @@ const siteUrl = getSiteUrl();
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: {
-    default: "A&C Merch Store — Wear the brand. Build the culture.",
-    template: "%s | A&C Merch Store",
+    default: "B&C Merch Store — Wear the brand. Build the culture.",
+    template: "%s | B&C Merch Store",
   },
   description:
-    "A&C Merch Store is premium streetwear built for everyday wear — clean tees, heavyweight hoodies, and considered accessories designed to build the culture.",
+    "B&C Merch Store is premium streetwear built for everyday wear — clean tees, heavyweight hoodies, and considered accessories designed to build the culture.",
   keywords: [
-    "A&C Merch Store",
+    "B&C Merch Store",
     "streetwear",
     "premium apparel",
     "hoodies",
     "t-shirts",
     "merch",
   ],
-  authors: [{ name: "A&C Merch Store" }],
-  creator: "A&C Merch Store",
+  authors: [{ name: "B&C Merch Store" }],
+  creator: "B&C Merch Store",
   openGraph: {
     type: "website",
-    siteName: "A&C Merch Store",
-    title: "A&C Merch Store — Wear the brand. Build the culture.",
+    siteName: "B&C Merch Store",
+    title: "B&C Merch Store — Wear the brand. Build the culture.",
     description:
       "Premium streetwear essentials — clean tees, heavyweight hoodies, and considered accessories.",
     url: siteUrl,
@@ -48,7 +48,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "A&C Merch Store — Wear the brand. Build the culture.",
+    title: "B&C Merch Store — Wear the brand. Build the culture.",
     description:
       "Premium streetwear essentials — clean tees, heavyweight hoodies, and considered accessories.",
   },

@@ -2,8 +2,8 @@ import type { Metadata } from "next";
 import { AdminShell } from "@/components/admin/admin-shell";
 
 export const metadata: Metadata = {
-  title: "Admin | A&C Merch Store",
-  description: "A&C Merch Store admin dashboard.",
+  title: "Admin | B&C Merch Store",
+  description: "B&C Merch Store admin dashboard.",
   robots: { index: false, follow: false },
 };
 

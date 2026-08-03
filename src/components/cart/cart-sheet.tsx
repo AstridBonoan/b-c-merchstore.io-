@@ -55,7 +55,7 @@ export function CartSheet() {
                     <ProductImage
                       src={line.imageUrl}
                       alt={line.name}
-                      fallbackLabel="A&C"
+                      fallbackLabel="B&C"
                       fill
                       sizes="80px"
                       className="object-cover"

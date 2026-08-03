@@ -1,4 +1,4 @@
-# A&C Merch Store
+# B&C Merch Store
 
 Premium streetwear e-commerce **demo** built for **B&C Software & Web**.
 
@@ -72,7 +72,7 @@ Manual run: Actions → **Deploy GitHub Pages** → Run workflow.
 ## Architecture notes
 
 - Static hosting cannot run Next.js API routes, server actions, or Stripe webhooks
-- Demo auth is stored in `localStorage` (`ac-demo-session`)
+- Demo auth is stored in `localStorage` (`bc-demo-session`)
 - Product catalog comes from seed data so the storefront works offline of Supabase
 - Optional Supabase/Stripe wiring remains in `lib/` and `supabase/` for a future dynamic host
 

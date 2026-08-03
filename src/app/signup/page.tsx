@@ -18,7 +18,7 @@ export default function SignUpPage() {
             <span className="flex h-9 w-9 items-center justify-center rounded-md bg-[#0d5c63] text-sm font-bold text-white">
               AC
             </span>
-            <span className="text-base font-semibold">A&C Merch Store</span>
+            <span className="text-base font-semibold">B&C Merch Store</span>
           </Link>
           <h1 className="mt-4 text-xl font-semibold">Create account</h1>
           <p className="mt-1 text-sm text-[#0c0c0c]/60">

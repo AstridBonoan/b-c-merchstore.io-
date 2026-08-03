@@ -4,7 +4,7 @@ import { Container } from "@/components/layout/container";
 
 export const metadata: Metadata = {
   title: "Checkout",
-  description: "Secure checkout for A&C Merch Store.",
+  description: "Secure checkout for B&C Merch Store.",
   robots: { index: false, follow: false },
 };
 

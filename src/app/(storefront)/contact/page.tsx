@@ -6,11 +6,11 @@ import { ContactForm } from "@/components/contact/contact-form";
 export const metadata: Metadata = {
   title: "Contact",
   description:
-    "Get in touch with the A&C Merch Store team — order questions, wholesale inquiries, and general support.",
+    "Get in touch with the B&C Merch Store team — order questions, wholesale inquiries, and general support.",
 };
 
 const CONTACT_DETAILS = [
-  { Icon: Mail, label: "hello@acmerchstore.com", href: "mailto:hello@acmerchstore.com" },
+  { Icon: Mail, label: "hello@bcmerchstore.com", href: "mailto:hello@bcmerchstore.com" },
   { Icon: Phone, label: "+1 (555) 010-2024", href: "tel:+15550102024" },
   { Icon: MapPin, label: "Studio 14, Portland, OR", href: undefined },
 ];

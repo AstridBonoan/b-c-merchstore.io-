@@ -26,8 +26,8 @@ export async function updateSession(request: NextRequest) {
 
   if (demoMode) {
     // Demo mode has no Supabase session. Guard /admin and /account using the
-    // `ac-demo-session` cookie. Authoritative checks still run in layouts/pages.
-    const raw = request.cookies.get("ac-demo-session")?.value;
+    // `bc-demo-session` cookie. Authoritative checks still run in layouts/pages.
+    const raw = request.cookies.get("bc-demo-session")?.value;
     let role: string | undefined;
     try {
       role = raw ? (JSON.parse(raw) as { role?: string }).role : undefined;

@@ -4,7 +4,7 @@ import { Container } from "@/components/layout/container";
 
 export const metadata: Metadata = {
   title: "Cart",
-  description: "Review your A&C Merch Store bag before checkout.",
+  description: "Review your B&C Merch Store bag before checkout.",
 };
 
 export default function CartPage() {

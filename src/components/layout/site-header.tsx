@@ -56,7 +56,7 @@ export function SiteHeader() {
             href="/"
             className="font-display text-xl font-extrabold tracking-tight text-[#0c0c0c] sm:text-2xl"
           >
-            A&amp;C
+            B&amp;C
           </Link>
 
           <nav className="hidden items-center gap-8 md:flex" aria-label="Primary">
@@ -122,7 +122,7 @@ export function SiteHeader() {
       <Sheet open={mobileOpen} onOpenChange={setMobileOpen}>
         <SheetContent side="left" className="flex w-full max-w-xs flex-col gap-8">
           <SheetHeader className="flex-row items-center justify-between space-y-0">
-            <SheetTitle className="font-display text-xl">A&amp;C</SheetTitle>
+            <SheetTitle className="font-display text-xl">B&amp;C</SheetTitle>
           </SheetHeader>
           <nav className="flex flex-col gap-1" aria-label="Mobile">
             {NAV_LINKS.map((link) => (

@@ -2,7 +2,7 @@
 
 import * as React from "react";
 
-const STORAGE_KEY = "ac-merch-wishlist";
+const STORAGE_KEY = "bc-merch-wishlist";
 
 let cache: string[] | null = null;
 const listeners = new Set<() => void>();

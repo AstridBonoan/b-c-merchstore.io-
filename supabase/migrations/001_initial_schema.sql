@@ -1,4 +1,4 @@
--- A&C Merch Store — initial schema
+-- B&C Merch Store — initial schema
 -- Apply in Supabase SQL editor or via supabase db push
 
 create extension if not exists "pgcrypto";

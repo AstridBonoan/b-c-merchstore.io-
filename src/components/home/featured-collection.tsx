@@ -25,7 +25,7 @@ export async function FeaturedCollection() {
             <ProductImage
               src={image.url}
               alt={image.alt}
-              fallbackLabel="A&C"
+              fallbackLabel="B&C"
               fill
               sizes="(min-width: 1024px) 45vw, 100vw"
               className="object-cover"

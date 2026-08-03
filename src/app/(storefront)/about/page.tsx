@@ -6,7 +6,7 @@ import { Reveal } from "@/components/motion/reveal";
 export const metadata: Metadata = {
   title: "About",
   description:
-    "The story behind A&C Merch Store — premium streetwear built on fabric-first design and long-term wear.",
+    "The story behind B&C Merch Store — premium streetwear built on fabric-first design and long-term wear.",
 };
 
 const VALUES = [
@@ -28,7 +28,7 @@ const TIMELINE = [
   {
     year: "2019",
     title: "Two friends, one tee",
-    body: "A&C started as a single run of hand-screened tees sold out of a shared studio apartment.",
+    body: "B&C started as a single run of hand-screened tees sold out of a shared studio apartment.",
   },
   {
     year: "2021",
@@ -38,7 +38,7 @@ const TIMELINE = [
   {
     year: "2023",
     title: "Building the culture",
-    body: "A&C became shorthand for a community, not just a logo — worn by makers, students, and neighborhood regulars alike.",
+    body: "B&C became shorthand for a community, not just a logo — worn by makers, students, and neighborhood regulars alike.",
   },
   {
     year: "2026",
@@ -59,7 +59,7 @@ export default function AboutPage() {
             Wear the brand. Build the culture.
           </h1>
           <p className="text-lg text-[#f4f4f2]/70">
-            A&amp;C Merch Store makes premium streetwear essentials for people who
+            B&amp;C Merch Store makes premium streetwear essentials for people who
             wear their clothes into the ground — then come back for more.
           </p>
         </Container>
@@ -72,7 +72,7 @@ export default function AboutPage() {
               Designed for daily rotation
             </h2>
             <p className="text-[#0c0c0c]/70">
-              We started A&amp;C because we couldn&rsquo;t find merch that felt as good
+              We started B&amp;C because we couldn&rsquo;t find merch that felt as good
               as it looked. Most of it was either disposable fast fashion or precious
               limited drops that never left the closet. We wanted something in between
               — clothes built well enough to wear constantly, and designed carefully

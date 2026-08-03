@@ -9,7 +9,7 @@ import { getSeedProductById } from "@/lib/products/seed-data";
 import { useCartStore } from "@/lib/cart/store";
 import { cn } from "@/lib/utils";
 
-const STORAGE_KEY = "ac-merch-wishlist";
+const STORAGE_KEY = "bc-merch-wishlist";
 
 let cache: string[] | null = null;
 const listeners = new Set<() => void>();

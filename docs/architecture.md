@@ -1,6 +1,6 @@
 # Architecture
 
-A&C Merch Store is a Next.js App Router application with a clear split between presentation and domain logic.
+B&C Merch Store is a Next.js App Router application with a clear split between presentation and domain logic.
 
 ## Layers
 

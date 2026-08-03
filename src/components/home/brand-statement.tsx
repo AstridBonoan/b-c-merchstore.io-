@@ -17,7 +17,7 @@ export function BrandStatement() {
             The Statement
           </span>
           <p className="font-display text-2xl font-semibold leading-snug tracking-tight text-[#0c0c0c] sm:text-3xl">
-            A&amp;C isn&rsquo;t about chasing trends — it&rsquo;s about building pieces
+            B&amp;C isn&rsquo;t about chasing trends — it&rsquo;s about building pieces
             that outlast them. Every drop starts with fabric first, fit second, and
             branding last.
           </p>

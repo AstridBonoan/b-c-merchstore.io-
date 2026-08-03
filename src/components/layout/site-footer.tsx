@@ -29,7 +29,7 @@ export function SiteFooter() {
       <Container className="grid gap-12 py-16 sm:py-20 lg:grid-cols-[1.4fr_1fr_1fr_1.2fr]">
         <div className="flex flex-col gap-4">
           <Link href="/" className="font-display text-2xl font-extrabold tracking-tight">
-            A&amp;C
+            B&amp;C
           </Link>
           <p className="max-w-xs text-sm text-[#f4f4f2]/60">
             Wear the brand. Build the culture. Premium streetwear essentials made for
@@ -100,7 +100,7 @@ export function SiteFooter() {
 
       <div className="border-t border-[#f4f4f2]/10">
         <Container className="flex flex-col items-center justify-between gap-3 py-6 text-xs text-[#f4f4f2]/50 sm:flex-row">
-          <p>&copy; {year} A&amp;C Merch Store. All rights reserved.</p>
+          <p>&copy; {year} B&amp;C Merch Store. All rights reserved.</p>
           <p>
             Built by{" "}
             <a

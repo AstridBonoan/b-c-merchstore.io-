@@ -3,8 +3,8 @@
 import * as React from "react";
 import type { UserRole } from "@/types";
 
-export const DEMO_ADMIN_EMAIL = "admin@acmerch.store";
-export const DEMO_SESSION_STORAGE_KEY = "ac-demo-session";
+export const DEMO_ADMIN_EMAIL = "admin@bcmerch.store";
+export const DEMO_SESSION_STORAGE_KEY = "bc-demo-session";
 
 export interface DemoSession {
   email: string;

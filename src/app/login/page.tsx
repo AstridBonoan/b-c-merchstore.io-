@@ -3,7 +3,7 @@ import { Suspense } from "react";
 import { LoginForm } from "@/components/auth/login-form";
 
 export const metadata: Metadata = {
-  title: "Sign in | A&C Merch Store",
+  title: "Sign in | B&C Merch Store",
 };
 
 export default function LoginPage() {

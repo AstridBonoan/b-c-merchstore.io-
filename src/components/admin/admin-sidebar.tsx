@@ -128,7 +128,7 @@ export function AdminSidebar({ session }: { session: DemoSession }) {
         <div className="flex h-full flex-col gap-6 px-4 py-6">
           <div>
             <p className="text-xs uppercase tracking-[0.2em] text-[#f4f4f2]/40">Admin</p>
-            <p className="mt-1 font-display text-lg font-semibold">A&C Merch</p>
+            <p className="mt-1 font-display text-lg font-semibold">B&C Merch</p>
           </div>
           <NavLinks pathname={pathname} />
           <div className="mt-auto">
@@ -154,7 +154,7 @@ export function AdminSidebar({ session }: { session: DemoSession }) {
         <SheetContent side="left" className="w-[280px] bg-[#0c0c0c] p-0 text-[#f4f4f2]">
           <SheetTitle className="sr-only">Admin navigation</SheetTitle>
           <div className="flex h-full flex-col gap-6 px-4 py-6">
-            <p className="font-display text-lg font-semibold">A&C Merch</p>
+            <p className="font-display text-lg font-semibold">B&C Merch</p>
             <NavLinks pathname={pathname} onNavigate={() => setOpen(false)} />
             <div className="mt-auto">
               <SidebarFooter session={session} />

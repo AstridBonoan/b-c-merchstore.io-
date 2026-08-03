@@ -33,7 +33,7 @@ export const categories: Category[] = [
     id: "cat-hats",
     name: "Hats",
     slug: "hats",
-    description: "Caps and beanies with clean A&C branding.",
+    description: "Caps and beanies with clean B&C branding.",
     image_url: "/images/categories/hats.jpg",
     sort_order: 3,
     created_at: now,
@@ -155,8 +155,8 @@ const productSeeds: ProductSeed[] = [
   {
     id: "prod-classic-tee",
     categoryId: "cat-tshirts",
-    name: "A&C Classic Tee",
-    slug: "ac-classic-tee",
+    name: "B&C Classic Tee",
+    slug: "bc-classic-tee",
     description:
       "Our flagship crewneck in midweight cotton jersey. Clean chest mark, reinforced shoulder seams, and a slightly relaxed fit that holds its shape wash after wash.",
     priceCents: 3200,
@@ -166,15 +166,15 @@ const productSeeds: ProductSeed[] = [
     images: [
       {
         url: "/images/products/classic-tee-front.jpg",
-        alt: "A&C Classic Tee front view in black",
+        alt: "B&C Classic Tee front view in black",
         primary: true,
       },
       {
         url: "/images/products/classic-tee-back.jpg",
-        alt: "A&C Classic Tee back view",
+        alt: "B&C Classic Tee back view",
       },
     ],
-    variants: apparelVariants("AC-CT", [
+    variants: apparelVariants("BC-CT", [
       { name: "Black", hex: "#0c0c0c" },
       { name: "Bone", hex: "#f4f4f2" },
       { name: "Teal", hex: "#0d5c63" },
@@ -183,8 +183,8 @@ const productSeeds: ProductSeed[] = [
   {
     id: "prod-essential-tee",
     categoryId: "cat-tshirts",
-    name: "A&C Essential Tee",
-    slug: "ac-essential-tee",
+    name: "B&C Essential Tee",
+    slug: "bc-essential-tee",
     description:
       "A lighter everyday tee with a soft hand and tidy rib collar. Designed as the quiet workhorse of the wardrobe — easy layering, zero fuss.",
     priceCents: 2800,
@@ -193,12 +193,12 @@ const productSeeds: ProductSeed[] = [
     images: [
       {
         url: "/images/products/essential-tee-front.jpg",
-        alt: "A&C Essential Tee in bone",
+        alt: "B&C Essential Tee in bone",
         primary: true,
       },
     ],
     variants: apparelVariants(
-      "AC-ET",
+      "BC-ET",
       [
         { name: "Bone", hex: "#f4f4f2" },
         { name: "Stone", hex: "#8a857c" },
@@ -210,8 +210,8 @@ const productSeeds: ProductSeed[] = [
   {
     id: "prod-signature-tee",
     categoryId: "cat-tshirts",
-    name: "A&C Signature Tee",
-    slug: "ac-signature-tee",
+    name: "B&C Signature Tee",
+    slug: "bc-signature-tee",
     description:
       "Heavier jersey with a tonal embroidered mark at the chest. Slightly longer sleeve and a structured drape for a sharper street silhouette.",
     priceCents: 3800,
@@ -223,12 +223,12 @@ const productSeeds: ProductSeed[] = [
     images: [
       {
         url: "/images/products/signature-tee-front.jpg",
-        alt: "A&C Signature Tee with embroidered mark",
+        alt: "B&C Signature Tee with embroidered mark",
         primary: true,
       },
     ],
     variants: apparelVariants(
-      "AC-ST",
+      "BC-ST",
       [
         { name: "Black", hex: "#0c0c0c" },
         { name: "Navy", hex: "#1a2332" },
@@ -239,8 +239,8 @@ const productSeeds: ProductSeed[] = [
   {
     id: "prod-core-hoodie",
     categoryId: "cat-hoodies",
-    name: "A&C Core Hoodie",
-    slug: "ac-core-hoodie",
+    name: "B&C Core Hoodie",
+    slug: "bc-core-hoodie",
     description:
       "Fleece-lined pullover with a roomy hood, kangaroo pocket, and matte drawcords. Built for cool mornings and late studio nights.",
     priceCents: 6800,
@@ -250,16 +250,16 @@ const productSeeds: ProductSeed[] = [
     images: [
       {
         url: "/images/products/core-hoodie-front.jpg",
-        alt: "A&C Core Hoodie in black",
+        alt: "B&C Core Hoodie in black",
         primary: true,
       },
       {
         url: "/images/products/core-hoodie-detail.jpg",
-        alt: "A&C Core Hoodie pocket detail",
+        alt: "B&C Core Hoodie pocket detail",
       },
     ],
     variants: apparelVariants(
-      "AC-CH",
+      "BC-CH",
       [
         { name: "Black", hex: "#0c0c0c" },
         { name: "Heather Gray", hex: "#9b9b9b" },
@@ -271,8 +271,8 @@ const productSeeds: ProductSeed[] = [
   {
     id: "prod-premium-pullover",
     categoryId: "cat-hoodies",
-    name: "A&C Premium Pullover",
-    slug: "ac-premium-pullover",
+    name: "B&C Premium Pullover",
+    slug: "bc-premium-pullover",
     description:
       "Brushed French terry with a refined rib hem and covered zipper-free finish. Soft enough for travel, sharp enough for evenings out.",
     priceCents: 7800,
@@ -281,12 +281,12 @@ const productSeeds: ProductSeed[] = [
     images: [
       {
         url: "/images/products/premium-pullover-front.jpg",
-        alt: "A&C Premium Pullover in bone",
+        alt: "B&C Premium Pullover in bone",
         primary: true,
       },
     ],
     variants: apparelVariants(
-      "AC-PP",
+      "BC-PP",
       [
         { name: "Bone", hex: "#f4f4f2" },
         { name: "Black", hex: "#0c0c0c" },
@@ -297,8 +297,8 @@ const productSeeds: ProductSeed[] = [
   {
     id: "prod-tech-hoodie",
     categoryId: "cat-hoodies",
-    name: "A&C Tech Hoodie",
-    slug: "ac-tech-hoodie",
+    name: "B&C Tech Hoodie",
+    slug: "bc-tech-hoodie",
     description:
       "Performance midlayer with a smooth face, stretch panels under the arms, and a media-friendly pocket. Moves with you without looking athletic.",
     priceCents: 8800,
@@ -308,12 +308,12 @@ const productSeeds: ProductSeed[] = [
     images: [
       {
         url: "/images/products/tech-hoodie-front.jpg",
-        alt: "A&C Tech Hoodie in charcoal",
+        alt: "B&C Tech Hoodie in charcoal",
         primary: true,
       },
     ],
     variants: apparelVariants(
-      "AC-TH",
+      "BC-TH",
       [
         { name: "Charcoal", hex: "#2f2f2f" },
         { name: "Teal", hex: "#0d5c63" },
@@ -324,17 +324,17 @@ const productSeeds: ProductSeed[] = [
   {
     id: "prod-classic-cap",
     categoryId: "cat-hats",
-    name: "A&C Classic Cap",
-    slug: "ac-classic-cap",
+    name: "B&C Classic Cap",
+    slug: "bc-classic-cap",
     description:
-      "Structured six-panel cap with a curved brim and tonal A&C embroidery. Adjustable strap for an easy everyday fit.",
+      "Structured six-panel cap with a curved brim and tonal B&C embroidery. Adjustable strap for an easy everyday fit.",
     priceCents: 2800,
     isBestseller: true,
     tags: ["cap", "embroidery"],
     images: [
       {
         url: "/images/products/classic-cap.jpg",
-        alt: "A&C Classic Cap in black",
+        alt: "B&C Classic Cap in black",
         primary: true,
       },
     ],
@@ -343,21 +343,21 @@ const productSeeds: ProductSeed[] = [
         size: "ONE_SIZE",
         color: "Black",
         colorHex: "#0c0c0c",
-        sku: "AC-CC-BLK-OS",
+        sku: "BC-CC-BLK-OS",
         inventory: 60,
       },
       {
         size: "ONE_SIZE",
         color: "Bone",
         colorHex: "#f4f4f2",
-        sku: "AC-CC-BNE-OS",
+        sku: "BC-CC-BNE-OS",
         inventory: 45,
       },
       {
         size: "ONE_SIZE",
         color: "Teal",
         colorHex: "#0d5c63",
-        sku: "AC-CC-TEL-OS",
+        sku: "BC-CC-TEL-OS",
         inventory: 30,
       },
     ],
@@ -365,8 +365,8 @@ const productSeeds: ProductSeed[] = [
   {
     id: "prod-snapback",
     categoryId: "cat-hats",
-    name: "A&C Snapback",
-    slug: "ac-snapback",
+    name: "B&C Snapback",
+    slug: "bc-snapback",
     description:
       "Flat-brim snapback with contrast underbill and raised mark. Firm structure that keeps its shape between wears.",
     priceCents: 3200,
@@ -375,7 +375,7 @@ const productSeeds: ProductSeed[] = [
     images: [
       {
         url: "/images/products/snapback.jpg",
-        alt: "A&C Snapback in black and teal",
+        alt: "B&C Snapback in black and teal",
         primary: true,
       },
     ],
@@ -384,14 +384,14 @@ const productSeeds: ProductSeed[] = [
         size: "ONE_SIZE",
         color: "Black",
         colorHex: "#0c0c0c",
-        sku: "AC-SB-BLK-OS",
+        sku: "BC-SB-BLK-OS",
         inventory: 40,
       },
       {
         size: "ONE_SIZE",
         color: "Teal",
         colorHex: "#0d5c63",
-        sku: "AC-SB-TEL-OS",
+        sku: "BC-SB-TEL-OS",
         inventory: 25,
       },
     ],
@@ -399,8 +399,8 @@ const productSeeds: ProductSeed[] = [
   {
     id: "prod-beanie",
     categoryId: "cat-hats",
-    name: "A&C Embroidered Beanie",
-    slug: "ac-embroidered-beanie",
+    name: "B&C Embroidered Beanie",
+    slug: "bc-embroidered-beanie",
     description:
       "Rib-knit cuff beanie with fine embroidered branding. Soft acrylic blend that keeps warmth without bulk.",
     priceCents: 2400,
@@ -410,7 +410,7 @@ const productSeeds: ProductSeed[] = [
     images: [
       {
         url: "/images/products/beanie.jpg",
-        alt: "A&C Embroidered Beanie in charcoal",
+        alt: "B&C Embroidered Beanie in charcoal",
         primary: true,
       },
     ],
@@ -419,21 +419,21 @@ const productSeeds: ProductSeed[] = [
         size: "ONE_SIZE",
         color: "Charcoal",
         colorHex: "#2f2f2f",
-        sku: "AC-EB-CHR-OS",
+        sku: "BC-EB-CHR-OS",
         inventory: 50,
       },
       {
         size: "ONE_SIZE",
         color: "Black",
         colorHex: "#0c0c0c",
-        sku: "AC-EB-BLK-OS",
+        sku: "BC-EB-BLK-OS",
         inventory: 50,
       },
       {
         size: "ONE_SIZE",
         color: "Bone",
         colorHex: "#f4f4f2",
-        sku: "AC-EB-BNE-OS",
+        sku: "BC-EB-BNE-OS",
         inventory: 35,
       },
     ],
@@ -441,8 +441,8 @@ const productSeeds: ProductSeed[] = [
   {
     id: "prod-tote",
     categoryId: "cat-accessories",
-    name: "A&C Tote Bag",
-    slug: "ac-tote-bag",
+    name: "B&C Tote Bag",
+    slug: "bc-tote-bag",
     description:
       "Heavyweight canvas tote with reinforced handles and an interior slip pocket. Wide enough for a laptop sleeve and a weekend run.",
     priceCents: 3600,
@@ -451,7 +451,7 @@ const productSeeds: ProductSeed[] = [
     images: [
       {
         url: "/images/products/tote-bag.jpg",
-        alt: "A&C Tote Bag in bone canvas",
+        alt: "B&C Tote Bag in bone canvas",
         primary: true,
       },
     ],
@@ -460,14 +460,14 @@ const productSeeds: ProductSeed[] = [
         size: "ONE_SIZE",
         color: "Bone",
         colorHex: "#f4f4f2",
-        sku: "AC-TB-BNE-OS",
+        sku: "BC-TB-BNE-OS",
         inventory: 70,
       },
       {
         size: "ONE_SIZE",
         color: "Black",
         colorHex: "#0c0c0c",
-        sku: "AC-TB-BLK-OS",
+        sku: "BC-TB-BLK-OS",
         inventory: 55,
       },
     ],
@@ -475,8 +475,8 @@ const productSeeds: ProductSeed[] = [
   {
     id: "prod-socks",
     categoryId: "cat-accessories",
-    name: "A&C Logo Socks",
-    slug: "ac-logo-socks",
+    name: "B&C Logo Socks",
+    slug: "bc-logo-socks",
     description:
       "Crew socks with cushioned sole and subtle ankle logo. Sold as a three-pair pack for the week that never ends.",
     priceCents: 1800,
@@ -485,7 +485,7 @@ const productSeeds: ProductSeed[] = [
     images: [
       {
         url: "/images/products/logo-socks.jpg",
-        alt: "A&C Logo Socks three-pack",
+        alt: "B&C Logo Socks three-pack",
         primary: true,
       },
     ],
@@ -494,21 +494,21 @@ const productSeeds: ProductSeed[] = [
         size: "S",
         color: "Mixed",
         colorHex: "#8a857c",
-        sku: "AC-LS-MIX-S",
+        sku: "BC-LS-MIX-S",
         inventory: 40,
       },
       {
         size: "M",
         color: "Mixed",
         colorHex: "#8a857c",
-        sku: "AC-LS-MIX-M",
+        sku: "BC-LS-MIX-M",
         inventory: 80,
       },
       {
         size: "L",
         color: "Mixed",
         colorHex: "#8a857c",
-        sku: "AC-LS-MIX-L",
+        sku: "BC-LS-MIX-L",
         inventory: 60,
       },
     ],
@@ -516,8 +516,8 @@ const productSeeds: ProductSeed[] = [
   {
     id: "prod-mug",
     categoryId: "cat-accessories",
-    name: "A&C Mug",
-    slug: "ac-mug",
+    name: "B&C Mug",
+    slug: "bc-mug",
     description:
       "Matte ceramic mug with a deep teal interior and embossed exterior mark. Holds 12 oz — perfect for the first pour of the day.",
     priceCents: 2200,
@@ -525,7 +525,7 @@ const productSeeds: ProductSeed[] = [
     images: [
       {
         url: "/images/products/mug.jpg",
-        alt: "A&C Mug with teal interior",
+        alt: "B&C Mug with teal interior",
         primary: true,
       },
     ],
@@ -534,14 +534,14 @@ const productSeeds: ProductSeed[] = [
         size: "ONE_SIZE",
         color: "Bone",
         colorHex: "#f4f4f2",
-        sku: "AC-MG-BNE-OS",
+        sku: "BC-MG-BNE-OS",
         inventory: 90,
       },
       {
         size: "ONE_SIZE",
         color: "Black",
         colorHex: "#0c0c0c",
-        sku: "AC-MG-BLK-OS",
+        sku: "BC-MG-BLK-OS",
         inventory: 75,
       },
     ],
@@ -549,8 +549,8 @@ const productSeeds: ProductSeed[] = [
   {
     id: "prod-coach-jacket",
     categoryId: "cat-accessories",
-    name: "A&C Coach Jacket",
-    slug: "ac-coach-jacket",
+    name: "B&C Coach Jacket",
+    slug: "bc-coach-jacket",
     description:
       "Lightweight water-resistant shell with snap front, elastic cuffs, and a hidden zip pocket. Packs small, looks intentional.",
     priceCents: 9800,
@@ -562,12 +562,12 @@ const productSeeds: ProductSeed[] = [
     images: [
       {
         url: "/images/products/coach-jacket.jpg",
-        alt: "A&C Coach Jacket in black",
+        alt: "B&C Coach Jacket in black",
         primary: true,
       },
     ],
     variants: apparelVariants(
-      "AC-CJ",
+      "BC-CJ",
       [
         { name: "Black", hex: "#0c0c0c" },
         { name: "Stone", hex: "#8a857c" },
@@ -578,8 +578,8 @@ const productSeeds: ProductSeed[] = [
   {
     id: "prod-weekend-short",
     categoryId: "cat-tshirts",
-    name: "A&C Weekend Short",
-    slug: "ac-weekend-short",
+    name: "B&C Weekend Short",
+    slug: "bc-weekend-short",
     description:
       "Mid-length cotton twill short with an elastic waist and side pockets. Easy throw-on for warm days and travel days alike.",
     priceCents: 4200,
@@ -589,12 +589,12 @@ const productSeeds: ProductSeed[] = [
     images: [
       {
         url: "/images/products/weekend-short.jpg",
-        alt: "A&C Weekend Short in stone",
+        alt: "B&C Weekend Short in stone",
         primary: true,
       },
     ],
     variants: apparelVariants(
-      "AC-WS",
+      "BC-WS",
       [
         { name: "Stone", hex: "#8a857c" },
         { name: "Black", hex: "#0c0c0c" },
@@ -606,8 +606,8 @@ const productSeeds: ProductSeed[] = [
   {
     id: "prod-camp-hat",
     categoryId: "cat-hats",
-    name: "A&C Camp Hat",
-    slug: "ac-camp-hat",
+    name: "B&C Camp Hat",
+    slug: "bc-camp-hat",
     description:
       "Unstructured five-panel camp hat with a soft brim and metal clasp. Low profile for days when a full snapback feels like too much.",
     priceCents: 3000,
@@ -615,7 +615,7 @@ const productSeeds: ProductSeed[] = [
     images: [
       {
         url: "/images/products/camp-hat.jpg",
-        alt: "A&C Camp Hat in bone",
+        alt: "B&C Camp Hat in bone",
         primary: true,
       },
     ],
@@ -624,14 +624,14 @@ const productSeeds: ProductSeed[] = [
         size: "ONE_SIZE",
         color: "Bone",
         colorHex: "#f4f4f2",
-        sku: "AC-CP-BNE-OS",
+        sku: "BC-CP-BNE-OS",
         inventory: 38,
       },
       {
         size: "ONE_SIZE",
         color: "Olive",
         colorHex: "#556b2f",
-        sku: "AC-CP-OLV-OS",
+        sku: "BC-CP-OLV-OS",
         inventory: 28,
       },
     ],
@@ -639,8 +639,8 @@ const productSeeds: ProductSeed[] = [
   {
     id: "prod-key-lanyard",
     categoryId: "cat-accessories",
-    name: "A&C Key Lanyard",
-    slug: "ac-key-lanyard",
+    name: "B&C Key Lanyard",
+    slug: "bc-key-lanyard",
     description:
       "Woven lanyard with a metal clasp and detachable key ring. Compact brand detail for studio keys, badges, and bags.",
     priceCents: 1400,
@@ -648,7 +648,7 @@ const productSeeds: ProductSeed[] = [
     images: [
       {
         url: "/images/products/key-lanyard.jpg",
-        alt: "A&C Key Lanyard in teal",
+        alt: "B&C Key Lanyard in teal",
         primary: true,
       },
     ],
@@ -657,14 +657,14 @@ const productSeeds: ProductSeed[] = [
         size: "ONE_SIZE",
         color: "Teal",
         colorHex: "#0d5c63",
-        sku: "AC-KL-TEL-OS",
+        sku: "BC-KL-TEL-OS",
         inventory: 120,
       },
       {
         size: "ONE_SIZE",
         color: "Black",
         colorHex: "#0c0c0c",
-        sku: "AC-KL-BLK-OS",
+        sku: "BC-KL-BLK-OS",
         inventory: 120,
       },
     ],

@@ -21,7 +21,7 @@ export function CartLineItem({ line }: { line: CartLine }) {
         <ProductImage
           src={line.imageUrl}
           alt={line.name}
-          fallbackLabel="A&C"
+          fallbackLabel="B&C"
           fill
           sizes="112px"
           className="object-cover"

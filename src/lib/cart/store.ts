@@ -53,7 +53,7 @@ export const useCartStore = create<CartState>()(
       toggleOpen: () => set((state) => ({ isOpen: !state.isOpen })),
     }),
     {
-      name: "ac-merch-cart",
+      name: "bc-merch-cart",
       partialize: (state) => ({ lines: state.lines }),
     },
   ),

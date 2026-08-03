@@ -15,7 +15,7 @@ export interface ProductImageProps extends Omit<ImageProps, "onError" | "src"> {
  */
 export function ProductImage({
   src,
-  fallbackLabel = "A&C",
+  fallbackLabel = "B&C",
   className,
   alt,
   ...props
