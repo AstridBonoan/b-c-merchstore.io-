@@ -146,9 +146,13 @@ export function CheckoutForm({ defaultEmail = "", defaultName = "" }: Props) {
         totalCents: placed.order.total_cents,
         isDemo: true,
       });
-      // Navigate without query params — Next on GitHub Pages often drops them
-      // during hydration, which left the confirmation page stuck on loading.
-      window.location.assign(withBasePath("/checkout/success/"));
+      // Hard navigate with order id in the query; confirmation also reads
+      // sessionStorage as a backup if the query is stripped.
+      window.location.assign(
+        withBasePath(
+          `/checkout/success/?id=${encodeURIComponent(placed.order.id)}`,
+        ),
+      )
     } catch {
       setServerError("Unable to complete checkout. Please try again.");
     } finally {
