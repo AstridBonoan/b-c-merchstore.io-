@@ -86,22 +86,22 @@ on conflict (slug) do update set
 -- Primary images
 insert into public.product_images (id, product_id, url, alt, sort_order, is_primary)
 values
-  ('33333333-3333-3333-3333-333333333301', '22222222-2222-2222-2222-222222222201', '/images/products/classic-tee-front.jpg', 'B&C Classic Tee front view in black', 0, true),
-  ('33333333-3333-3333-3333-333333333302', '22222222-2222-2222-2222-222222222202', '/images/products/essential-tee-front.jpg', 'B&C Essential Tee in bone', 0, true),
-  ('33333333-3333-3333-3333-333333333303', '22222222-2222-2222-2222-222222222203', '/images/products/signature-tee-front.jpg', 'B&C Signature Tee with embroidered mark', 0, true),
-  ('33333333-3333-3333-3333-333333333304', '22222222-2222-2222-2222-222222222204', '/images/products/core-hoodie-front.jpg', 'B&C Core Hoodie in black', 0, true),
-  ('33333333-3333-3333-3333-333333333305', '22222222-2222-2222-2222-222222222205', '/images/products/premium-pullover-front.jpg', 'B&C Premium Pullover in bone', 0, true),
-  ('33333333-3333-3333-3333-333333333306', '22222222-2222-2222-2222-222222222206', '/images/products/tech-hoodie-front.jpg', 'B&C Tech Hoodie in charcoal', 0, true),
-  ('33333333-3333-3333-3333-333333333307', '22222222-2222-2222-2222-222222222207', '/images/products/classic-cap.jpg', 'B&C Classic Cap in black', 0, true),
-  ('33333333-3333-3333-3333-333333333308', '22222222-2222-2222-2222-222222222208', '/images/products/snapback.jpg', 'B&C Snapback in black and teal', 0, true),
-  ('33333333-3333-3333-3333-333333333309', '22222222-2222-2222-2222-222222222209', '/images/products/beanie.jpg', 'B&C Embroidered Beanie in charcoal', 0, true),
-  ('33333333-3333-3333-3333-333333333310', '22222222-2222-2222-2222-222222222210', '/images/products/tote-bag.jpg', 'B&C Tote Bag in bone canvas', 0, true),
-  ('33333333-3333-3333-3333-333333333311', '22222222-2222-2222-2222-222222222211', '/images/products/logo-socks.jpg', 'B&C Logo Socks three-pack', 0, true),
-  ('33333333-3333-3333-3333-333333333312', '22222222-2222-2222-2222-222222222212', '/images/products/mug.jpg', 'B&C Mug with teal interior', 0, true),
-  ('33333333-3333-3333-3333-333333333313', '22222222-2222-2222-2222-222222222213', '/images/products/coach-jacket.jpg', 'B&C Coach Jacket in black', 0, true),
-  ('33333333-3333-3333-3333-333333333314', '22222222-2222-2222-2222-222222222214', '/images/products/weekend-short.jpg', 'B&C Weekend Short in stone', 0, true),
-  ('33333333-3333-3333-3333-333333333315', '22222222-2222-2222-2222-222222222215', '/images/products/camp-hat.jpg', 'B&C Camp Hat in bone', 0, true),
-  ('33333333-3333-3333-3333-333333333316', '22222222-2222-2222-2222-222222222216', '/images/products/key-lanyard.jpg', 'B&C Key Lanyard in teal', 0, true)
+  ('33333333-3333-3333-3333-333333333301', '22222222-2222-2222-2222-222222222201', '/images/products/classic-tee-front.png', 'B&C Classic Tee front view in black', 0, true),
+  ('33333333-3333-3333-3333-333333333302', '22222222-2222-2222-2222-222222222202', '/images/products/essential-tee-front.png', 'B&C Essential Tee in bone', 0, true),
+  ('33333333-3333-3333-3333-333333333303', '22222222-2222-2222-2222-222222222203', '/images/products/signature-tee-front.png', 'B&C Signature Tee with embroidered mark', 0, true),
+  ('33333333-3333-3333-3333-333333333304', '22222222-2222-2222-2222-222222222204', '/images/products/core-hoodie-front.png', 'B&C Core Hoodie in black', 0, true),
+  ('33333333-3333-3333-3333-333333333305', '22222222-2222-2222-2222-222222222205', '/images/products/premium-pullover-front.png', 'B&C Premium Pullover in bone', 0, true),
+  ('33333333-3333-3333-3333-333333333306', '22222222-2222-2222-2222-222222222206', '/images/products/tech-hoodie-front.png', 'B&C Tech Hoodie in charcoal', 0, true),
+  ('33333333-3333-3333-3333-333333333307', '22222222-2222-2222-2222-222222222207', '/images/products/classic-cap.png', 'B&C Classic Cap in black', 0, true),
+  ('33333333-3333-3333-3333-333333333308', '22222222-2222-2222-2222-222222222208', '/images/products/snapback.png', 'B&C Snapback in black and teal', 0, true),
+  ('33333333-3333-3333-3333-333333333309', '22222222-2222-2222-2222-222222222209', '/images/products/beanie.png', 'B&C Embroidered Beanie in charcoal', 0, true),
+  ('33333333-3333-3333-3333-333333333310', '22222222-2222-2222-2222-222222222210', '/images/products/tote-bag.png', 'B&C Tote Bag in bone canvas', 0, true),
+  ('33333333-3333-3333-3333-333333333311', '22222222-2222-2222-2222-222222222211', '/images/products/logo-socks.png', 'B&C Logo Socks three-pack', 0, true),
+  ('33333333-3333-3333-3333-333333333312', '22222222-2222-2222-2222-222222222212', '/images/products/mug.png', 'B&C Mug with teal interior', 0, true),
+  ('33333333-3333-3333-3333-333333333313', '22222222-2222-2222-2222-222222222213', '/images/products/coach-jacket.png', 'B&C Coach Jacket in black', 0, true),
+  ('33333333-3333-3333-3333-333333333314', '22222222-2222-2222-2222-222222222214', '/images/products/weekend-short.png', 'B&C Weekend Short in stone', 0, true),
+  ('33333333-3333-3333-3333-333333333315', '22222222-2222-2222-2222-222222222215', '/images/products/camp-hat.png', 'B&C Camp Hat in bone', 0, true),
+  ('33333333-3333-3333-3333-333333333316', '22222222-2222-2222-2222-222222222216', '/images/products/key-lanyard.png', 'B&C Key Lanyard in teal', 0, true)
 on conflict (id) do update set
   url = excluded.url,
   alt = excluded.alt,

@@ -165,12 +165,12 @@ const productSeeds: ProductSeed[] = [
     tags: ["essentials", "cotton"],
     images: [
       {
-        url: "/images/products/classic-tee-front.jpg",
+        url: "/images/products/classic-tee-front.png",
         alt: "B&C Classic Tee front view in black",
         primary: true,
       },
       {
-        url: "/images/products/classic-tee-back.jpg",
+        url: "/images/products/classic-tee-back.png",
         alt: "B&C Classic Tee back view",
       },
     ],
@@ -192,7 +192,7 @@ const productSeeds: ProductSeed[] = [
     tags: ["essentials", "lightweight"],
     images: [
       {
-        url: "/images/products/essential-tee-front.jpg",
+        url: "/images/products/essential-tee-front.png",
         alt: "B&C Essential Tee in bone",
         primary: true,
       },
@@ -222,7 +222,7 @@ const productSeeds: ProductSeed[] = [
     createdAt: "2026-03-01T12:00:00.000Z",
     images: [
       {
-        url: "/images/products/signature-tee-front.jpg",
+        url: "/images/products/signature-tee-front.png",
         alt: "B&C Signature Tee with embroidered mark",
         primary: true,
       },
@@ -249,12 +249,12 @@ const productSeeds: ProductSeed[] = [
     tags: ["fleece", "layering"],
     images: [
       {
-        url: "/images/products/core-hoodie-front.jpg",
+        url: "/images/products/core-hoodie-front.png",
         alt: "B&C Core Hoodie in black",
         primary: true,
       },
       {
-        url: "/images/products/core-hoodie-detail.jpg",
+        url: "/images/products/core-hoodie-detail.png",
         alt: "B&C Core Hoodie pocket detail",
       },
     ],
@@ -280,7 +280,7 @@ const productSeeds: ProductSeed[] = [
     tags: ["premium", "french-terry"],
     images: [
       {
-        url: "/images/products/premium-pullover-front.jpg",
+        url: "/images/products/premium-pullover-front.png",
         alt: "B&C Premium Pullover in bone",
         primary: true,
       },
@@ -307,7 +307,7 @@ const productSeeds: ProductSeed[] = [
     createdAt: "2026-04-12T12:00:00.000Z",
     images: [
       {
-        url: "/images/products/tech-hoodie-front.jpg",
+        url: "/images/products/tech-hoodie-front.png",
         alt: "B&C Tech Hoodie in charcoal",
         primary: true,
       },
@@ -333,7 +333,7 @@ const productSeeds: ProductSeed[] = [
     tags: ["cap", "embroidery"],
     images: [
       {
-        url: "/images/products/classic-cap.jpg",
+        url: "/images/products/classic-cap.png",
         alt: "B&C Classic Cap in black",
         primary: true,
       },
@@ -374,7 +374,7 @@ const productSeeds: ProductSeed[] = [
     tags: ["snapback"],
     images: [
       {
-        url: "/images/products/snapback.jpg",
+        url: "/images/products/snapback.png",
         alt: "B&C Snapback in black and teal",
         primary: true,
       },
@@ -409,7 +409,7 @@ const productSeeds: ProductSeed[] = [
     createdAt: "2026-02-20T12:00:00.000Z",
     images: [
       {
-        url: "/images/products/beanie.jpg",
+        url: "/images/products/beanie.png",
         alt: "B&C Embroidered Beanie in charcoal",
         primary: true,
       },
@@ -450,7 +450,7 @@ const productSeeds: ProductSeed[] = [
     tags: ["tote", "canvas"],
     images: [
       {
-        url: "/images/products/tote-bag.jpg",
+        url: "/images/products/tote-bag.png",
         alt: "B&C Tote Bag in bone canvas",
         primary: true,
       },
@@ -484,7 +484,7 @@ const productSeeds: ProductSeed[] = [
     tags: ["socks", "pack"],
     images: [
       {
-        url: "/images/products/logo-socks.jpg",
+        url: "/images/products/logo-socks.png",
         alt: "B&C Logo Socks three-pack",
         primary: true,
       },
@@ -524,7 +524,7 @@ const productSeeds: ProductSeed[] = [
     tags: ["mug", "home"],
     images: [
       {
-        url: "/images/products/mug.jpg",
+        url: "/images/products/mug.png",
         alt: "B&C Mug with teal interior",
         primary: true,
       },
@@ -561,7 +561,7 @@ const productSeeds: ProductSeed[] = [
     createdAt: "2026-05-01T12:00:00.000Z",
     images: [
       {
-        url: "/images/products/coach-jacket.jpg",
+        url: "/images/products/coach-jacket.png",
         alt: "B&C Coach Jacket in black",
         primary: true,
       },
@@ -588,7 +588,7 @@ const productSeeds: ProductSeed[] = [
     createdAt: "2026-05-18T12:00:00.000Z",
     images: [
       {
-        url: "/images/products/weekend-short.jpg",
+        url: "/images/products/weekend-short.png",
         alt: "B&C Weekend Short in stone",
         primary: true,
       },
@@ -614,7 +614,7 @@ const productSeeds: ProductSeed[] = [
     tags: ["camp-hat"],
     images: [
       {
-        url: "/images/products/camp-hat.jpg",
+        url: "/images/products/camp-hat.png",
         alt: "B&C Camp Hat in bone",
         primary: true,
       },
@@ -647,7 +647,7 @@ const productSeeds: ProductSeed[] = [
     tags: ["lanyard", "small-goods"],
     images: [
       {
-        url: "/images/products/key-lanyard.jpg",
+        url: "/images/products/key-lanyard.png",
         alt: "B&C Key Lanyard in teal",
         primary: true,
       },

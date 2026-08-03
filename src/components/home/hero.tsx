@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { ArrowRight } from "lucide-react";
 import { Container } from "@/components/layout/container";
 import { buttonVariants } from "@/components/ui/button";
@@ -19,9 +20,17 @@ export function Hero() {
         <span className="animate-fade-up text-xs font-semibold uppercase tracking-[0.32em] text-[#0d5c63]">
           Fall Collection — Now Live
         </span>
-        <h1 className="animate-fade-up animate-delay-100 font-display text-[15vw] font-extrabold leading-[0.92] tracking-tight sm:text-[9vw] lg:text-[7.5vw]">
-          B&amp;C
-        </h1>
+        <h1 className="animate-fade-up animate-delay-100 sr-only">B&C Merch Store</h1>
+        <div className="animate-fade-up animate-delay-100 w-full max-w-3xl">
+          <Image
+            src="/images/brand/bc-logo.png"
+            alt="B&C"
+            width={960}
+            height={320}
+            priority
+            className="h-auto w-full"
+          />
+        </div>
         <div className="animate-fade-up animate-delay-200 flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between">
           <p className="max-w-md text-lg text-[#f4f4f2]/75 sm:text-xl">
             Wear the brand. Build the culture.
@@ -43,10 +52,11 @@ export function Hero() {
               className={buttonVariants({
                 variant: "outline",
                 size: "lg",
-                className: "border-[#f4f4f2]/25 text-[#f4f4f2] hover:bg-[#f4f4f2]/10",
+                className:
+                  "border-[#f4f4f2]/30 bg-transparent text-[#f4f4f2] hover:bg-[#f4f4f2]/10",
               })}
             >
-              Our Story
+              Our story
             </Link>
           </div>
         </div>

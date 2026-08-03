@@ -13,7 +13,7 @@ const baseLine: CartLine = {
   quantity: 1,
   name: "B&C Classic Tee",
   slug: "bc-classic-tee",
-  imageUrl: "/images/products/classic-tee.jpg",
+  imageUrl: "/images/products/classic-tee-front.png",
   size: "M",
   color: "Black",
   unitPriceCents: 3200,
