@@ -40,8 +40,19 @@ export function ProductFilters({
   const pathname = usePathname();
   const searchParams = useSearchParams();
   const [mobileOpen, setMobileOpen] = React.useState(false);
-  const [searchValue, setSearchValue] = React.useState(searchParams.get("search") ?? "");
+  const urlSearch = searchParams.get("search") ?? "";
+  const [searchValue, setSearchValue] = React.useState(urlSearch);
+  const [prevUrlSearch, setPrevUrlSearch] = React.useState(urlSearch);
   const searchDebounce = React.useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  if (urlSearch !== prevUrlSearch) {
+    setPrevUrlSearch(urlSearch);
+    setSearchValue(urlSearch);
+    if (searchDebounce.current) {
+      clearTimeout(searchDebounce.current);
+      searchDebounce.current = null;
+    }
+  }
 
   const category = searchParams.get("category") ?? "";
   const sort = (searchParams.get("sort") as ProductSortOption | null) ?? "featured";
