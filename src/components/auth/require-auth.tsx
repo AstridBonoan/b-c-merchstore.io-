@@ -2,13 +2,13 @@
 
 import * as React from "react";
 import Link from "next/link";
-import { usePathname, useRouter } from "next/navigation";
 import {
   clearClientSession,
   useDemoSession,
   type DemoSession,
 } from "@/lib/auth/client-session";
 import { Button } from "@/components/ui/button";
+import { withBasePath } from "@/lib/paths";
 
 export function RequireAuth({
   children,
@@ -20,8 +20,6 @@ export function RequireAuth({
   nextPath: string;
 }) {
   const session = useDemoSession();
-  const router = useRouter();
-  const pathname = usePathname();
   const hydrated = React.useSyncExternalStore(
     () => () => undefined,
     () => true,
@@ -30,14 +28,17 @@ export function RequireAuth({
 
   React.useEffect(() => {
     if (!hydrated) return;
+    // Hard navigations — Next soft routing crashes on GitHub Pages static export.
     if (!session) {
-      router.replace(`/login/?next=${encodeURIComponent(nextPath || pathname)}`);
+      window.location.replace(
+        withBasePath(`/login/?next=${encodeURIComponent(nextPath)}`),
+      );
       return;
     }
     if (role === "admin" && session.role !== "admin") {
-      router.replace("/login/?next=/admin/");
+      window.location.replace(withBasePath("/login/?next=/admin/"));
     }
-  }, [hydrated, session, role, router, nextPath, pathname]);
+  }, [hydrated, session, role, nextPath]);
 
   if (!hydrated) {
     return (
@@ -54,7 +55,6 @@ export function RequireAuth({
 }
 
 export function SignOutButton({ className }: { className?: string }) {
-  const router = useRouter();
   return (
     <Button
       type="button"
@@ -62,7 +62,7 @@ export function SignOutButton({ className }: { className?: string }) {
       className={className}
       onClick={() => {
         clearClientSession();
-        router.push("/login/");
+        window.location.assign(withBasePath("/login/"));
       }}
     >
       Sign out

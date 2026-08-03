@@ -44,7 +44,12 @@ export default function CheckoutSuccessPage() {
         : "Thank you — your order confirmation is ready.";
     }
     if (viewEl && data.orderId) {
-      viewEl.setAttribute("href", base + "/order/?id=" + encodeURIComponent(String(data.orderId)));
+      var orderHref = base + "/order/?id=" + encodeURIComponent(String(data.orderId));
+      viewEl.setAttribute("href", orderHref);
+      viewEl.onclick = function (event) {
+        event.preventDefault();
+        window.location.assign(orderHref);
+      };
     }
   } catch (e) {}
 })();`;

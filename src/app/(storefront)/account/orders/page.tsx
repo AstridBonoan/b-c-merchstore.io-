@@ -6,6 +6,7 @@ import { useOrdersByEmail } from "@/lib/orders/use-orders";
 import { Container } from "@/components/layout/container";
 import { buttonVariants } from "@/components/ui/button";
 import { formatPrice } from "@/lib/products/pricing";
+import { withBasePath } from "@/lib/paths";
 import { cn } from "@/lib/utils";
 
 export default function AccountOrdersPage() {
@@ -52,8 +53,8 @@ function OrdersList({ email }: { email: string }) {
         <ul className="divide-y divide-[#0c0c0c]/10 overflow-hidden rounded-2xl border border-[#0c0c0c]/10 bg-white">
           {orders.map((order) => (
             <li key={order.id}>
-              <Link
-                href={`/order/?id=${encodeURIComponent(order.id)}`}
+              <a
+                href={withBasePath(`/order/?id=${encodeURIComponent(order.id)}`)}
                 className="flex flex-col gap-2 px-5 py-4 transition hover:bg-[#0c0c0c]/[0.02] sm:flex-row sm:items-center sm:justify-between"
               >
                 <div>
@@ -66,7 +67,7 @@ function OrdersList({ email }: { email: string }) {
                 <p className="font-semibold tabular-nums">
                   {formatPrice(order.total_cents)}
                 </p>
-              </Link>
+              </a>
             </li>
           ))}
         </ul>
