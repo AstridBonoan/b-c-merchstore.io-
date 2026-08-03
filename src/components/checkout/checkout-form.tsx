@@ -2,7 +2,6 @@
 
 import * as React from "react";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
 import { Controller, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { CreditCard, Loader2, Lock } from "lucide-react";
@@ -29,7 +28,6 @@ type Props = {
 };
 
 export function CheckoutForm({ defaultEmail = "", defaultName = "" }: Props) {
-  const router = useRouter();
   const lines = useCartStore((state) => state.lines);
   const clearCart = useCartStore((state) => state.clearCart);
   const summary = useCartSummary();
@@ -147,7 +145,11 @@ export function CheckoutForm({ defaultEmail = "", defaultName = "" }: Props) {
         total: String(placed.order.total_cents),
         demo: "1",
       });
-      router.push(`/checkout/success/?${params.toString()}`);
+      // Full navigation so GitHub Pages static hosting loads /checkout/success
+      // reliably (client soft-routing often shows "This page couldn't load").
+      window.location.assign(
+        withBasePath(`/checkout/success/?${params.toString()}`),
+      );
     } catch {
       setServerError("Unable to complete checkout. Please try again.");
     } finally {
