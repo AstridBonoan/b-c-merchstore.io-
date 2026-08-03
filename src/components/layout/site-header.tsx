@@ -3,8 +3,9 @@
 import * as React from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Menu, Search, ShoppingBag, User, X } from "lucide-react";
+import { Menu, ShoppingBag, User, X } from "lucide-react";
 import { BrandLogo } from "@/components/brand/brand-logo";
+import { NavSearch } from "@/components/layout/nav-search";
 import { Container } from "@/components/layout/container";
 import { Sheet, SheetContent, SheetHeader, SheetTitle } from "@/components/ui/sheet";
 import { Button } from "@/components/ui/button";
@@ -52,10 +53,10 @@ export function SiteHeader() {
             : "border-transparent bg-[#f4f4f2]",
         )}
       >
-        <Container className="flex h-16 items-center justify-between sm:h-20">
+        <Container className="flex h-16 items-center gap-3 sm:h-20 sm:gap-4">
           <Link
             href="/"
-            className="inline-flex items-center"
+            className="inline-flex shrink-0 items-center"
             aria-label="B&C Merch Store home"
           >
             <BrandLogo
@@ -67,9 +68,13 @@ export function SiteHeader() {
             />
           </Link>
 
-          <nav className="hidden items-center gap-8 md:flex" aria-label="Primary">
+          <nav
+            className="hidden items-center gap-6 lg:flex"
+            aria-label="Primary"
+          >
             {NAV_LINKS.map((link) => {
-              const active = pathname === link.href || pathname.startsWith(`${link.href}/`);
+              const active =
+                pathname === link.href || pathname.startsWith(`${link.href}/`);
               return (
                 <Link
                   key={link.href}
@@ -86,18 +91,13 @@ export function SiteHeader() {
             })}
           </nav>
 
-          <div className="flex items-center gap-1 sm:gap-2">
-            <Link
-              href="/shop"
-              aria-label="Search products"
-              className="hidden size-10 items-center justify-center rounded-md text-[#0c0c0c]/80 transition-colors hover:bg-[#0c0c0c]/5 hover:text-[#0c0c0c] sm:inline-flex"
-            >
-              <Search className="size-[18px]" aria-hidden="true" />
-            </Link>
+          <div className="ml-auto flex min-w-0 flex-1 items-center justify-end gap-1 sm:gap-2 md:max-w-none lg:ml-0 lg:max-w-md lg:flex-none">
+            <NavSearch className="hidden w-full max-w-xs md:flex lg:max-w-sm" />
+
             <Link
               href="/account"
               aria-label="Account"
-              className="hidden size-10 items-center justify-center rounded-md text-[#0c0c0c]/80 transition-colors hover:bg-[#0c0c0c]/5 hover:text-[#0c0c0c] sm:inline-flex"
+              className="hidden size-10 shrink-0 items-center justify-center rounded-md text-[#0c0c0c]/80 transition-colors hover:bg-[#0c0c0c]/5 hover:text-[#0c0c0c] sm:inline-flex"
             >
               <User className="size-[18px]" aria-hidden="true" />
             </Link>
@@ -105,7 +105,7 @@ export function SiteHeader() {
               type="button"
               onClick={toggleCart}
               aria-label={`Open bag${itemCount > 0 ? `, ${itemCount} items` : ""}`}
-              className="relative inline-flex size-10 items-center justify-center rounded-md text-[#0c0c0c]/80 transition-colors hover:bg-[#0c0c0c]/5 hover:text-[#0c0c0c]"
+              className="relative inline-flex size-10 shrink-0 items-center justify-center rounded-md text-[#0c0c0c]/80 transition-colors hover:bg-[#0c0c0c]/5 hover:text-[#0c0c0c]"
             >
               <ShoppingBag className="size-[18px]" aria-hidden="true" />
               {itemCount > 0 ? (
@@ -119,7 +119,7 @@ export function SiteHeader() {
               onClick={() => setMobileOpen(true)}
               aria-label="Open menu"
               aria-expanded={mobileOpen}
-              className="inline-flex size-10 items-center justify-center rounded-md text-[#0c0c0c]/80 transition-colors hover:bg-[#0c0c0c]/5 hover:text-[#0c0c0c] md:hidden"
+              className="inline-flex size-10 shrink-0 items-center justify-center rounded-md text-[#0c0c0c]/80 transition-colors hover:bg-[#0c0c0c]/5 hover:text-[#0c0c0c] md:hidden"
             >
               <Menu className="size-[18px]" aria-hidden="true" />
             </button>
@@ -128,16 +128,17 @@ export function SiteHeader() {
       </header>
 
       <Sheet open={mobileOpen} onOpenChange={setMobileOpen}>
-        <SheetContent side="left" className="flex w-full max-w-xs flex-col gap-8">
+        <SheetContent side="left" className="flex w-full max-w-xs flex-col gap-6">
           <SheetHeader className="flex-row items-center justify-between space-y-0">
             <SheetTitle className="sr-only">B&C menu</SheetTitle>
-            <BrandLogo
-              variant="light"
-              width={100}
-              height={34}
-              className="h-7 w-auto"
-            />
+            <BrandLogo variant="light" width={100} height={34} className="h-7 w-auto" />
           </SheetHeader>
+
+          <NavSearch
+            className="w-full"
+            onNavigate={() => setMobileOpen(false)}
+          />
+
           <nav className="flex flex-col gap-1" aria-label="Mobile">
             {NAV_LINKS.map((link) => (
               <Link

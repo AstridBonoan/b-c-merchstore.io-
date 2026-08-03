@@ -6,9 +6,10 @@ test.describe("storefront smoke", () => {
     await expect(page.getByRole("link", { name: /B&C/i }).first()).toBeVisible();
   });
 
-  test("shop listing is reachable", async ({ page }) => {
-    await page.goto("/shop");
+  test("shop search filters products via query param", async ({ page }) => {
+    await page.goto("/shop/?search=hoodie");
     await expect(page.getByRole("heading", { name: /shop/i })).toBeVisible();
+    await expect(page.getByText(/hoodie/i).first()).toBeVisible();
   });
 
   test("product page opens from shop", async ({ page }) => {
