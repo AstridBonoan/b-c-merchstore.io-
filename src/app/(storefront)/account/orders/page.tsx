@@ -1,0 +1,70 @@
+import type { Metadata } from "next";
+import Link from "next/link";
+import { requireCustomerSession } from "@/lib/auth/session";
+import { getDemoOrdersByEmail } from "@/lib/orders/demo-orders";
+import { Container } from "@/components/layout/container";
+import { buttonVariants } from "@/components/ui/button";
+import { formatPrice } from "@/lib/products/pricing";
+import { cn } from "@/lib/utils";
+
+export const metadata: Metadata = {
+  title: "Orders",
+  robots: { index: false, follow: false },
+};
+
+export default async function AccountOrdersPage() {
+  const session = await requireCustomerSession("/account/orders");
+  const orders = getDemoOrdersByEmail(session.email);
+
+  return (
+    <Container className="py-10 md:py-16">
+      <div className="mb-8 flex items-end justify-between gap-4">
+        <div>
+          <p className="text-xs font-medium uppercase tracking-[0.2em] text-[#0d5c63]">
+            Account
+          </p>
+          <h1 className="mt-2 font-display text-3xl font-bold tracking-tight">
+            Order history
+          </h1>
+        </div>
+        <Link href="/account" className={cn(buttonVariants({ variant: "ghost", size: "sm" }))}>
+          Back
+        </Link>
+      </div>
+
+      {orders.length === 0 ? (
+        <div className="rounded-2xl border border-dashed border-[#0c0c0c]/15 bg-white/50 px-6 py-16 text-center">
+          <h2 className="font-display text-xl font-semibold">No orders yet</h2>
+          <p className="mt-2 text-sm text-[#0c0c0c]/60">
+            When you place an order, it will show up here.
+          </p>
+          <Link href="/shop" className={cn(buttonVariants(), "mt-6 inline-flex")}>
+            Shop now
+          </Link>
+        </div>
+      ) : (
+        <ul className="divide-y divide-[#0c0c0c]/10 overflow-hidden rounded-2xl border border-[#0c0c0c]/10 bg-white">
+          {orders.map((order) => (
+            <li key={order.id}>
+              <Link
+                href={`/account/orders/${order.id}`}
+                className="flex flex-col gap-2 px-5 py-4 transition hover:bg-[#0c0c0c]/[0.02] sm:flex-row sm:items-center sm:justify-between"
+              >
+                <div>
+                  <p className="font-medium">Order {order.id}</p>
+                  <p className="text-sm text-[#0c0c0c]/55">
+                    {new Date(order.created_at).toLocaleDateString()} ·{" "}
+                    <span className="capitalize">{order.status}</span>
+                  </p>
+                </div>
+                <p className="font-semibold tabular-nums">
+                  {formatPrice(order.total_cents)}
+                </p>
+              </Link>
+            </li>
+          ))}
+        </ul>
+      )}
+    </Container>
+  );
+}

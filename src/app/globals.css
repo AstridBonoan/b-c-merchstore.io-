@@ -1,0 +1,116 @@
+@import "tailwindcss";
+
+:root {
+  --background: #f4f4f2;
+  --foreground: #0c0c0c;
+
+  /* Brand tokens */
+  --color-ink: #0c0c0c;
+  --color-bone: #f4f4f2;
+  --color-teal: #0d5c63;
+  --color-stone: #8a857c;
+
+  --font-sans: var(--font-manrope);
+  --font-display: var(--font-syne);
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-ink: var(--color-ink);
+  --color-bone: var(--color-bone);
+  --color-teal: var(--color-teal);
+  --color-stone: var(--color-stone);
+  --font-sans: var(--font-sans);
+  --font-display: var(--font-display);
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background: var(--background);
+    color: var(--foreground);
+    font-family: var(--font-sans), ui-sans-serif, system-ui, sans-serif;
+  }
+
+  ::selection {
+    background: var(--color-teal);
+    color: var(--color-bone);
+  }
+}
+
+/* ---------------------------------------------------------------------- */
+/* Motion                                                                  */
+/* Three intentional, restrained animations: a load-in fade-up for hero   */
+/* copy, a scroll-triggered reveal for section content, and a header      */
+/* blur/elevation transition driven by scroll position.                   */
+/* ---------------------------------------------------------------------- */
+
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.animate-fade-up {
+  animation: fade-up 0.9s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.animate-fade-in {
+  animation: fade-in 1s ease both;
+}
+
+.animate-delay-100 {
+  animation-delay: 0.1s;
+}
+.animate-delay-200 {
+  animation-delay: 0.2s;
+}
+.animate-delay-300 {
+  animation-delay: 0.3s;
+}
+.animate-delay-400 {
+  animation-delay: 0.4s;
+}
+
+/* Scroll-reveal: toggled to `.is-visible` by the Reveal client component. */
+.reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition:
+    opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-fade-up,
+  .animate-fade-in,
+  .reveal {
+    animation: none !important;
+    transition: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}
