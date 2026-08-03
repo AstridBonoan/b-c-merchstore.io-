@@ -1,34 +1,55 @@
 # Deployment
 
-## Vercel (primary)
+## Primary host: GitHub Pages
 
-1. Push this repository to GitHub.
-2. Import the repo in [Vercel](https://vercel.com).
-3. Framework preset: Next.js.
-4. Add environment variables from `.env.example`.
-5. Deploy.
-6. Set `NEXT_PUBLIC_SITE_URL` to the production URL.
-7. In Stripe Dashboard → Webhooks, add:
-   `https://YOUR_DOMAIN/api/webhooks/stripe`
-   Events: `checkout.session.completed`, `checkout.session.expired`, `payment_intent.payment_failed`.
-8. In Supabase Auth, allow the production redirect URL.
-9. Disable demo mode (`DEMO_MODE=false`) once Supabase + Stripe are live.
+The public portfolio demo is static and hosted on GitHub Pages so anyone can visit without a Vercel login.
 
-## GitHub Pages (static demo only)
+### Configure Pages (one-time)
 
-The full app depends on server features:
+1. Open the repo on GitHub → **Settings → Pages**
+2. **Build and deployment → Source**: Deploy from a branch
+3. **Branch**: `gh-pages`
+4. **Folder**: `/ (root)`
+5. Save
 
-- Route handlers (`/api/checkout`, webhooks)
-- Server Components with protected sessions
-- Stripe + Supabase server SDKs
+Public URL:
 
-GitHub Pages cannot host that runtime. Use Pages only for a static marketing/export snapshot if you intentionally generate one. The workflow in `.github/workflows/pages.yml` is scaffolded but disabled (`if: false`) until an `out/` artifact strategy is chosen.
+`https://astridbonoan.github.io/b-c-merchstore.io-/`
 
-## Production checklist
+### Automatic deploys
 
-- [ ] Secrets only in Vercel/Supabase/Stripe dashboards
-- [ ] Stripe **test** vs **live** keys clearly separated
-- [ ] Webhook signature verification enabled
-- [ ] RLS enabled and verified
-- [ ] Admin role cannot be set from the client
-- [ ] Image CDN / Supabase Storage configured
+Workflow: `.github/workflows/pages.yml`
+
+On every push to `main` (or manual workflow dispatch):
+
+1. `npm ci`
+2. `npm run build:pages` (static export + basePath)
+3. Add `out/.nojekyll`
+4. Publish `out/` to the `gh-pages` branch via `peaceiris/actions-gh-pages`
+
+### Local static build
+
+```bash
+npm run build:pages
+```
+
+Output is written to `out/`.
+
+## What works on Pages
+
+- Browse catalog / product pages
+- Cart + wishlist (localStorage)
+- Demo login / account / admin UI
+- Demo checkout confirmation (no real payment)
+
+## What Pages cannot host
+
+- Stripe Checkout Session API + webhooks
+- Supabase Auth cookie sessions / RLS-backed APIs
+- Next.js Route Handlers / Server Actions
+
+Those integrations remain in the codebase for documentation and a future dynamic host, but the shipped demo path is static.
+
+## Optional future: Vercel
+
+Vercel is **not** required for this demo. If you later need live Stripe/Supabase, deploy a dynamic Next.js build separately and keep GitHub Pages as the public portfolio snapshot.

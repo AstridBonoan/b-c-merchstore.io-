@@ -71,38 +71,41 @@ export function CheckoutForm({ defaultEmail = "", defaultName = "" }: Props) {
     setServerError(null);
     setSubmitting(true);
     try {
-      const response = await fetch("/api/checkout", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          customer: data,
-          lines: lines.map((line) => ({
-            productId: line.productId,
-            variantId: line.variantId,
-            quantity: line.quantity,
-          })),
-        }),
+      // GitHub Pages static demo: validate against seed catalog in the browser.
+      // No API routes / Stripe secrets are available on static hosting.
+      const { getSeedProductById } = await import("@/lib/products/seed-data");
+      const { canAddToCart } = await import("@/lib/products/inventory");
+      const { summarizeCart } = await import("@/lib/cart/calculations");
+
+      for (const line of lines) {
+        const product = getSeedProductById(line.productId);
+        const variant = product?.variants?.find((v) => v.id === line.variantId);
+        if (!product?.is_active || !variant?.is_active) {
+          setServerError("One or more products are unavailable.");
+          return;
+        }
+        const stock = canAddToCart(variant.inventory_quantity, line.quantity);
+        if (!stock.allowed) {
+          setServerError(stock.error ?? "Insufficient inventory.");
+          return;
+        }
+        // Prefer canonical seed price over client snapshot.
+        line.unitPriceCents = variant.price_cents ?? product.price_cents;
+      }
+
+      const summary = summarizeCart(lines);
+      const params = new URLSearchParams({
+        session_id: `demo_${Date.now()}`,
+        email: data.email,
+        total: String(summary.totalCents),
+        demo: "1",
       });
 
-      const payload = (await response.json()) as {
-        ok?: boolean;
-        url?: string;
-        error?: string;
-        demo?: boolean;
-      };
-
-      if (!response.ok || !payload.ok || !payload.url) {
-        setServerError(payload.error ?? "Unable to start checkout.");
-        return;
-      }
-
-      if (payload.demo) {
-        clearCart();
-      }
-
-      router.push(payload.url);
+      clearCart();
+      // Next.js router applies basePath automatically for GitHub Pages.
+      router.push(`/checkout/success/?${params.toString()}`);
     } catch {
-      setServerError("Network error. Please try again.");
+      setServerError("Unable to complete demo checkout. Please try again.");
     } finally {
       setSubmitting(false);
     }

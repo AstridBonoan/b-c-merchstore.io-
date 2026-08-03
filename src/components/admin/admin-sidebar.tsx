@@ -15,18 +15,24 @@ import {
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTitle } from "@/components/ui/sheet";
-import type { DemoSession } from "@/lib/auth/session";
+import {
+  clearClientSession,
+  type DemoSession,
+} from "@/lib/auth/client-session";
+import { useRouter } from "next/navigation";
 
 const NAV_ITEMS = [
-  { href: "/admin", label: "Dashboard", icon: LayoutDashboard, exact: true },
-  { href: "/admin/products", label: "Products", icon: Package },
-  { href: "/admin/orders", label: "Orders", icon: ShoppingBag },
-  { href: "/admin/customers", label: "Customers", icon: Users },
+  { href: "/admin/", label: "Dashboard", icon: LayoutDashboard, exact: true },
+  { href: "/admin/products/", label: "Products", icon: Package },
+  { href: "/admin/orders/", label: "Orders", icon: ShoppingBag },
+  { href: "/admin/customers/", label: "Customers", icon: Users },
 ] as const;
 
 function isActive(pathname: string, href: string, exact?: boolean) {
-  if (exact) return pathname === href;
-  return pathname === href || pathname.startsWith(`${href}/`);
+  const normalizedPath = pathname.endsWith("/") ? pathname : `${pathname}/`;
+  const normalizedHref = href.endsWith("/") ? href : `${href}/`;
+  if (exact) return normalizedPath === normalizedHref || pathname === href.replace(/\/$/, "");
+  return normalizedPath === normalizedHref || normalizedPath.startsWith(normalizedHref);
 }
 
 function NavLinks({
@@ -71,127 +77,89 @@ function NavLinks({
 
 function SidebarFooter({
   session,
-  signOutAction,
   variant = "dark",
 }: {
   session: DemoSession;
-  signOutAction: () => Promise<void>;
   variant?: "dark" | "light";
 }) {
-  const dark = variant === "dark";
+  const router = useRouter();
   return (
-    <div
-      className={cn(
-        "mt-auto flex flex-col gap-3 border-t pt-4",
-        dark ? "border-white/10" : "border-[#0c0c0c]/10",
-      )}
-    >
-      <div className="min-w-0">
-        <p className={cn("truncate text-sm font-medium", dark ? "text-[#f4f4f2]" : "text-[#0c0c0c]")}>
-          {session.name}
-        </p>
-        <p className={cn("truncate text-xs", dark ? "text-[#f4f4f2]/50" : "text-[#0c0c0c]/50")}>
-          {session.email}
-        </p>
+    <div className="space-y-3 border-t border-white/10 pt-4">
+      <div className={cn("px-3 text-xs", variant === "dark" ? "text-[#f4f4f2]/60" : "text-[#0c0c0c]/60")}>
+        <p className="font-medium text-inherit opacity-100">{session.name}</p>
+        <p className="truncate">{session.email}</p>
       </div>
+      <Button
+        type="button"
+        variant="ghost"
+        className={cn(
+          "w-full justify-start gap-2",
+          variant === "dark" && "text-[#f4f4f2]/80 hover:bg-white/10 hover:text-white",
+        )}
+        onClick={() => {
+          clearClientSession();
+          router.push("/login/");
+        }}
+      >
+        <LogOut className="h-4 w-4" aria-hidden="true" />
+        Sign out
+      </Button>
       <Link
         href="/"
         className={cn(
-          "flex items-center gap-2 rounded-md px-3 py-1.5 text-sm transition-colors",
-          dark
-            ? "text-[#f4f4f2]/70 hover:bg-white/10 hover:text-[#f4f4f2]"
-            : "text-[#0c0c0c]/70 hover:bg-[#0c0c0c]/5 hover:text-[#0c0c0c]",
+          "flex items-center gap-2 px-3 text-sm",
+          variant === "dark" ? "text-[#f4f4f2]/60 hover:text-white" : "text-[#0c0c0c]/60",
         )}
       >
         <Home className="h-4 w-4" aria-hidden="true" />
         Back to store
       </Link>
-      <form action={signOutAction}>
-        <button
-          type="submit"
-          className={cn(
-            "flex w-full items-center gap-2 rounded-md px-3 py-1.5 text-sm transition-colors",
-            dark
-              ? "text-[#f4f4f2]/70 hover:bg-white/10 hover:text-[#f4f4f2]"
-              : "text-[#0c0c0c]/70 hover:bg-[#0c0c0c]/5 hover:text-[#0c0c0c]",
-          )}
-        >
-          <LogOut className="h-4 w-4" aria-hidden="true" />
-          Sign out
-        </button>
-      </form>
     </div>
   );
 }
 
-export interface AdminSidebarProps {
-  session: DemoSession;
-  signOutAction: () => Promise<void>;
-}
-
-export function AdminSidebar({ session, signOutAction }: AdminSidebarProps) {
+export function AdminSidebar({ session }: { session: DemoSession }) {
   const pathname = usePathname();
-  const [mobileOpen, setMobileOpen] = React.useState(false);
+  const [open, setOpen] = React.useState(false);
 
   return (
     <>
-      {/* Desktop sidebar */}
-      <aside className="hidden w-64 shrink-0 flex-col bg-[#0c0c0c] px-4 py-6 md:flex">
-        <Link href="/admin" className="mb-8 flex items-center gap-2 px-1">
-          <span className="flex h-8 w-8 items-center justify-center rounded-md bg-[#0d5c63] text-sm font-bold text-white">
-            AC
-          </span>
-          <span className="text-sm font-semibold tracking-wide text-[#f4f4f2]">
-            A&C Admin
-          </span>
-        </Link>
-        <NavLinks pathname={pathname} />
-        <SidebarFooter session={session} signOutAction={signOutAction} />
+      <aside className="hidden w-64 shrink-0 flex-col bg-[#0c0c0c] text-[#f4f4f2] lg:flex">
+        <div className="flex h-full flex-col gap-6 px-4 py-6">
+          <div>
+            <p className="text-xs uppercase tracking-[0.2em] text-[#f4f4f2]/40">Admin</p>
+            <p className="mt-1 font-display text-lg font-semibold">A&C Merch</p>
+          </div>
+          <NavLinks pathname={pathname} />
+          <div className="mt-auto">
+            <SidebarFooter session={session} />
+          </div>
+        </div>
       </aside>
 
-      {/* Mobile top bar */}
-      <div className="flex items-center justify-between border-b border-[#0c0c0c]/10 bg-[#0c0c0c] px-4 py-3 md:hidden">
-        <Link href="/admin" className="flex items-center gap-2">
-          <span className="flex h-8 w-8 items-center justify-center rounded-md bg-[#0d5c63] text-sm font-bold text-white">
-            AC
-          </span>
-          <span className="text-sm font-semibold tracking-wide text-[#f4f4f2]">
-            A&C Admin
-          </span>
-        </Link>
+      <div className="flex items-center justify-between border-b border-[#0c0c0c]/10 bg-white px-4 py-3 lg:hidden">
+        <p className="font-display text-base font-semibold">Admin</p>
         <Button
           type="button"
-          variant="ghost"
+          variant="outline"
           size="icon"
           aria-label="Open admin menu"
-          className="text-[#f4f4f2] hover:bg-white/10 hover:text-[#f4f4f2]"
-          onClick={() => setMobileOpen(true)}
+          onClick={() => setOpen(true)}
         >
-          <Menu className="h-5 w-5" />
+          <Menu className="h-4 w-4" />
         </Button>
       </div>
 
-      <Sheet open={mobileOpen} onOpenChange={setMobileOpen}>
-        <SheetContent side="left" className="flex max-w-xs flex-col">
+      <Sheet open={open} onOpenChange={setOpen}>
+        <SheetContent side="left" className="w-[280px] bg-[#0c0c0c] p-0 text-[#f4f4f2]">
           <SheetTitle className="sr-only">Admin navigation</SheetTitle>
-          <Link
-            href="/admin"
-            className="mb-8 flex items-center gap-2 px-1"
-            onClick={() => setMobileOpen(false)}
-          >
-            <span className="flex h-8 w-8 items-center justify-center rounded-md bg-[#0d5c63] text-sm font-bold text-white">
-              AC
-            </span>
-            <span className="text-sm font-semibold tracking-wide text-[#0c0c0c]">
-              A&C Admin
-            </span>
-          </Link>
-          <NavLinks
-            pathname={pathname}
-            onNavigate={() => setMobileOpen(false)}
-            variant="light"
-          />
-          <SidebarFooter session={session} signOutAction={signOutAction} variant="light" />
+          <div className="flex h-full flex-col gap-6 px-4 py-6">
+            <p className="font-display text-lg font-semibold">A&C Merch</p>
+            <NavLinks pathname={pathname} onNavigate={() => setOpen(false)} />
+            <div className="mt-auto">
+              <SidebarFooter session={session} />
+            </div>
+          </div>
         </SheetContent>
       </Sheet>
     </>

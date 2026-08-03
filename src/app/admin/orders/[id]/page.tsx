@@ -3,7 +3,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { format } from "date-fns";
 import { ArrowLeft, Mail, MapPin, Phone } from "lucide-react";
-import { getDemoOrderById } from "@/lib/orders/demo-orders";
+import { getDemoOrderById, getDemoOrders } from "@/lib/orders/demo-orders";
 import { getDemoCustomerByEmail } from "@/lib/customers/demo-customers";
 import { formatPrice } from "@/lib/products/pricing";
 import { cn } from "@/lib/utils";
@@ -16,6 +16,10 @@ import { Separator } from "@/components/ui/separator";
 export const metadata: Metadata = {
   title: "Order detail | Admin",
 };
+
+export function generateStaticParams() {
+  return getDemoOrders().map((order) => ({ id: order.id }));
+}
 
 export default async function AdminOrderDetailPage({
   params,

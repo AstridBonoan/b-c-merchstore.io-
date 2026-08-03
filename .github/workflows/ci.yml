@@ -39,8 +39,11 @@ jobs:
         run: npm run test
 
       - name: Production build
-        run: npm run build
+        run: npm run build:pages
         env:
+          STATIC_EXPORT: "true"
+          GITHUB_PAGES: "true"
           NEXT_PUBLIC_DEMO_MODE: "true"
           DEMO_MODE: "true"
-          NEXT_PUBLIC_SITE_URL: http://localhost:3000
+          NEXT_PUBLIC_BASE_PATH: /b-c-merchstore.io-
+          NEXT_PUBLIC_SITE_URL: https://astridbonoan.github.io/b-c-merchstore.io-

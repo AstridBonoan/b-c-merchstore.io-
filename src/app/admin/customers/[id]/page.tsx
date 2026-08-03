@@ -6,6 +6,7 @@ import { ArrowLeft, Calendar, DollarSign, Mail, MapPin, Phone, ShoppingBag } fro
 import {
   getDemoCustomerWithStatsById,
   getCustomerOrders,
+  getDemoCustomers,
 } from "@/lib/customers/demo-customers";
 import { formatPrice } from "@/lib/products/pricing";
 import { PageHeader } from "@/components/admin/page-header";
@@ -15,6 +16,10 @@ import { OrderStatusBadge } from "@/components/admin/order-status-select";
 export const metadata: Metadata = {
   title: "Customer detail | Admin",
 };
+
+export function generateStaticParams() {
+  return getDemoCustomers().map((customer) => ({ id: customer.id }));
+}
 
 export default async function AdminCustomerDetailPage({
   params,

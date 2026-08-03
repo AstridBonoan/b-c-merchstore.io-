@@ -1,39 +1,53 @@
-name: GitHub Pages (static demo)
+name: Deploy GitHub Pages
 
-# Static export is a portfolio/demo fallback only.
-# Full e-commerce (auth, Stripe, API routes) requires Vercel.
 on:
-  workflow_dispatch:
   push:
     branches: [main]
-    paths:
-      - "out/**"
-      - ".github/workflows/pages.yml"
+  workflow_dispatch:
 
 permissions:
-  contents: read
-  pages: write
-  id-token: write
+  contents: write
 
 concurrency:
-  group: pages
+  group: pages-branch-deploy
   cancel-in-progress: true
 
 jobs:
   deploy:
-    if: false # Enable after generating a static `out/` export intentionally.
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
+    name: Build static site and push gh-pages
     runs-on: ubuntu-latest
+    timeout-minutes: 20
+
     steps:
-      - uses: actions/checkout@v4
-      - name: Setup Pages
-        uses: actions/configure-pages@v5
-      - name: Upload artifact
-        uses: actions/upload-pages-artifact@v3
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
         with:
-          path: out
-      - name: Deploy
-        id: deployment
-        uses: actions/deploy-pages@v4
+          node-version: "22"
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build static export
+        run: npm run build:pages
+        env:
+          STATIC_EXPORT: "true"
+          GITHUB_PAGES: "true"
+          NEXT_PUBLIC_DEMO_MODE: "true"
+          DEMO_MODE: "true"
+          NEXT_PUBLIC_BASE_PATH: /b-c-merchstore.io-
+          NEXT_PUBLIC_SITE_URL: https://astridbonoan.github.io/b-c-merchstore.io-
+
+      - name: Add .nojekyll
+        run: touch out/.nojekyll
+
+      - name: Deploy to gh-pages branch
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./out
+          publish_branch: gh-pages
+          force_orphan: true

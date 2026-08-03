@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { getProductBySlug } from "@/lib/products/queries";
+import { getSeedProducts } from "@/lib/products/seed-data";
 import { Container } from "@/components/layout/container";
 import { ProductGallery } from "@/components/products/product-gallery";
 import { ProductPurchasePanel } from "@/components/products/product-purchase-panel";
@@ -8,6 +9,12 @@ import { RelatedProducts } from "@/components/products/related-products";
 
 interface ProductPageProps {
   params: Promise<{ slug: string }>;
+}
+
+export function generateStaticParams() {
+  return getSeedProducts()
+    .filter((product) => product.is_active)
+    .map((product) => ({ slug: product.slug }));
 }
 
 export async function generateMetadata({

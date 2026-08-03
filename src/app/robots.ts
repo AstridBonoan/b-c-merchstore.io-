@@ -1,6 +1,8 @@
 import type { MetadataRoute } from "next";
 import { getSiteUrl } from "@/lib/utils";
 
+export const dynamic = "force-static";
+
 export default function robots(): MetadataRoute.Robots {
   const siteUrl = getSiteUrl();
 
@@ -8,7 +10,7 @@ export default function robots(): MetadataRoute.Robots {
     rules: {
       userAgent: "*",
       allow: "/",
-      disallow: ["/account", "/admin", "/api"],
+      disallow: ["/account/", "/admin/"],
     },
     sitemap: `${siteUrl}/sitemap.xml`,
   };

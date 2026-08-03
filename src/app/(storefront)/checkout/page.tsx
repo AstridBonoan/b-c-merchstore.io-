@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { CheckoutForm } from "@/components/checkout/checkout-form";
 import { Container } from "@/components/layout/container";
-import { getDemoSession } from "@/lib/auth/session";
 
 export const metadata: Metadata = {
   title: "Checkout",
@@ -9,9 +8,7 @@ export const metadata: Metadata = {
   robots: { index: false, follow: false },
 };
 
-export default async function CheckoutPage() {
-  const session = await getDemoSession();
-
+export default function CheckoutPage() {
   return (
     <Container className="py-10 md:py-16">
       <div className="mb-8 md:mb-12">
@@ -22,14 +19,11 @@ export default async function CheckoutPage() {
           Complete your order
         </h1>
         <p className="mt-2 max-w-xl text-sm text-[#0c0c0c]/60">
-          Prices and inventory are validated on the server before payment. Card
-          details are handled by Stripe — we never store raw payment data.
+          This GitHub Pages demo validates products locally and completes a safe
+          demo checkout — no real card charges.
         </p>
       </div>
-      <CheckoutForm
-        defaultEmail={session?.email ?? ""}
-        defaultName={session?.name ?? ""}
-      />
+      <CheckoutForm />
     </Container>
   );
 }

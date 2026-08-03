@@ -1,32 +1,14 @@
-import type { Metadata } from "next";
+"use client";
+
 import Link from "next/link";
-import { redirect } from "next/navigation";
-import { buildDemoSession, setDemoSession } from "@/lib/auth/session";
+import { useRouter } from "next/navigation";
+import { buildDemoSession, setClientSession } from "@/lib/auth/client-session";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 
-export const metadata: Metadata = {
-  title: "Create account",
-};
-
-async function demoSignUpAction(formData: FormData) {
-  "use server";
-  const email = String(formData.get("email") ?? "").trim();
-  const name = String(formData.get("fullName") ?? "").trim();
-  if (!email) {
-    redirect("/signup?error=missing-email");
-  }
-  await setDemoSession(buildDemoSession(email, name || undefined));
-  redirect("/account");
-}
-
-export default async function SignUpPage({
-  searchParams,
-}: {
-  searchParams: Promise<{ error?: string }>;
-}) {
-  const { error } = await searchParams;
+export default function SignUpPage() {
+  const router = useRouter();
 
   return (
     <div className="flex min-h-screen items-center justify-center bg-[#f4f4f2] px-4 py-12">
@@ -40,17 +22,22 @@ export default async function SignUpPage({
           </Link>
           <h1 className="mt-4 text-xl font-semibold">Create account</h1>
           <p className="mt-1 text-sm text-[#0c0c0c]/60">
-            Demo signup creates a local session. Connect Supabase Auth for production.
+            Demo signup creates a local browser session for this GitHub Pages demo.
           </p>
         </div>
 
-        {error === "missing-email" ? (
-          <p className="mb-4 rounded-md border border-red-200 bg-red-50 px-3 py-2 text-sm text-red-700">
-            Email is required.
-          </p>
-        ) : null}
-
-        <form action={demoSignUpAction} className="flex flex-col gap-4">
+        <form
+          className="flex flex-col gap-4"
+          onSubmit={(event) => {
+            event.preventDefault();
+            const data = new FormData(event.currentTarget);
+            const email = String(data.get("email") ?? "").trim();
+            const name = String(data.get("fullName") ?? "").trim();
+            if (!email) return;
+            setClientSession(buildDemoSession(email, name || undefined));
+            router.push("/account/");
+          }}
+        >
           <div className="space-y-1.5">
             <Label htmlFor="fullName">Full name</Label>
             <Input id="fullName" name="fullName" required autoComplete="name" />
@@ -75,7 +62,7 @@ export default async function SignUpPage({
 
         <p className="mt-6 text-center text-sm text-[#0c0c0c]/60">
           Already have an account?{" "}
-          <Link href="/login" className="font-medium text-[#0d5c63] hover:underline">
+          <Link href="/login/" className="font-medium text-[#0d5c63] hover:underline">
             Sign in
           </Link>
         </p>
