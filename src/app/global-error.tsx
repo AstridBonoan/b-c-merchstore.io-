@@ -2,7 +2,7 @@
 
 /**
  * Last-resort UI when the App Router root crashes.
- * Uses a relative home link so GitHub Pages basePath still works.
+ * Hard links use the Pages basePath so Home never soft-routes.
  */
 export default function GlobalError({
   reset,
@@ -10,6 +10,7 @@ export default function GlobalError({
   error: Error & { digest?: string };
   reset: () => void;
 }) {
+  const base = "/b-c-merchstore.io-";
   return (
     <html lang="en">
       <body
@@ -27,7 +28,7 @@ export default function GlobalError({
           <h1 style={{ fontSize: 28, margin: "0 0 12px" }}>Something went wrong</h1>
           <p style={{ margin: "0 0 24px", color: "#0c0c0c99" }}>
             The page hit an unexpected error. Your demo order may still be saved
-            — try Order history or head home.
+            in this browser.
           </p>
           <div style={{ display: "flex", gap: 12, justifyContent: "center" }}>
             <button
@@ -45,7 +46,7 @@ export default function GlobalError({
               Try again
             </button>
             <a
-              href="./"
+              href={`${base}/`}
               style={{
                 borderRadius: 8,
                 padding: "10px 16px",
