@@ -11,6 +11,7 @@ import {
   getSeedProductBySlug,
   getSeedProducts,
 } from "@/lib/products/seed-data";
+import { productMatchesSearch } from "@/lib/products/search";
 
 function sortProducts(products: Product[], sort: ProductSortOption = "featured"): Product[] {
   const sorted = [...products];
@@ -40,18 +41,8 @@ function sortProducts(products: Product[], sort: ProductSortOption = "featured")
 function matchesFilters(product: Product, filters: ProductFilters): boolean {
   if (!product.is_active) return false;
 
-  if (filters.search) {
-    const q = filters.search.toLowerCase().trim();
-    const haystack = [
-      product.name,
-      product.description,
-      product.slug,
-      ...(product.tags ?? []),
-      product.category?.name ?? "",
-    ]
-      .join(" ")
-      .toLowerCase();
-    if (!haystack.includes(q)) return false;
+  if (filters.search && !productMatchesSearch(product, filters.search)) {
+    return false;
   }
 
   if (filters.category) {

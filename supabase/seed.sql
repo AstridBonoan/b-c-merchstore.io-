@@ -10,7 +10,8 @@ values
   ('11111111-1111-1111-1111-111111111101', 'T-Shirts', 't-shirts', 'Everyday tees cut for comfort and built to last.', '/images/categories/t-shirts.jpg', 1),
   ('11111111-1111-1111-1111-111111111102', 'Hoodies', 'hoodies', 'Layer-ready hoodies with premium hand-feel.', '/images/categories/hoodies.jpg', 2),
   ('11111111-1111-1111-1111-111111111103', 'Hats', 'hats', 'Caps and beanies with clean B&C branding.', '/images/categories/hats.jpg', 3),
-  ('11111111-1111-1111-1111-111111111104', 'Accessories', 'accessories', 'Small goods that finish the look.', '/images/categories/accessories.jpg', 4)
+  ('11111111-1111-1111-1111-111111111104', 'Accessories', 'accessories', 'Small goods that finish the look.', '/images/categories/accessories.jpg', 4),
+  ('11111111-1111-1111-1111-111111111105', 'Shorts', 'shorts', 'Warm-weather shorts built for easy everyday wear.', '/images/categories/accessories.jpg', 5)
 on conflict (slug) do update set
   name = excluded.name,
   description = excluded.description,
@@ -62,7 +63,7 @@ insert into public.products (
   ('22222222-2222-2222-2222-222222222213', '11111111-1111-1111-1111-111111111104', 'B&C Coach Jacket', 'bc-coach-jacket',
    'Lightweight water-resistant shell with snap front, elastic cuffs, and a hidden zip pocket. Packs small, looks intentional.',
    9800, 11000, true, false, true, true, array['outerwear','jacket'], '2026-05-01T12:00:00Z'),
-  ('22222222-2222-2222-2222-222222222214', '11111111-1111-1111-1111-111111111101', 'B&C Weekend Short', 'bc-weekend-short',
+  ('22222222-2222-2222-2222-222222222214', '11111111-1111-1111-1111-111111111105', 'B&C Weekend Short', 'bc-weekend-short',
    'Mid-length cotton twill short with an elastic waist and side pockets. Easy throw-on for warm days and travel days alike.',
    4200, null, false, false, true, true, array['shorts','summer'], '2026-05-18T12:00:00Z'),
   ('22222222-2222-2222-2222-222222222215', '11111111-1111-1111-1111-111111111103', 'B&C Camp Hat', 'bc-camp-hat',

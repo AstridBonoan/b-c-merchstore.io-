@@ -9,6 +9,7 @@ import type {
   ProductSortOption,
 } from "@/types";
 import { getSeedCategories, getSeedProducts } from "@/lib/products/seed-data";
+import { productMatchesSearch } from "@/lib/products/search";
 import { Container } from "@/components/layout/container";
 import { ProductGrid } from "@/components/products/product-grid";
 import { ProductFilters } from "@/components/products/product-filters";
@@ -33,18 +34,8 @@ function filterFromSeed(filters: ProductFiltersType): {
   let list = getSeedProducts().filter((p) => p.is_active);
 
   if (filters.search) {
-    const q = filters.search.toLowerCase().trim();
     list = list.filter((product) =>
-      [
-        product.name,
-        product.description,
-        product.slug,
-        ...(product.tags ?? []),
-        product.category?.name ?? "",
-      ]
-        .join(" ")
-        .toLowerCase()
-        .includes(q),
+      productMatchesSearch(product, filters.search!),
     );
   }
 

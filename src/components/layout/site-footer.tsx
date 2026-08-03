@@ -6,6 +6,7 @@ import { NewsletterForm } from "@/components/forms/newsletter-form";
 const SHOP_LINKS = [
   { href: "/shop?category=t-shirts", label: "T-Shirts" },
   { href: "/shop?category=hoodies", label: "Hoodies" },
+  { href: "/shop?category=shorts", label: "Shorts" },
   { href: "/shop?category=hats", label: "Hats" },
   { href: "/shop?category=accessories", label: "Accessories" },
 ];

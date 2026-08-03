@@ -49,6 +49,16 @@ export const categories: Category[] = [
     created_at: now,
     updated_at: now,
   },
+  {
+    id: "cat-shorts",
+    name: "Shorts",
+    slug: "shorts",
+    description: "Warm-weather shorts built for easy everyday wear.",
+    image_url: "/images/categories/accessories.jpg",
+    sort_order: 5,
+    created_at: now,
+    updated_at: now,
+  },
 ];
 
 type VariantSeed = {
@@ -577,7 +587,7 @@ const productSeeds: ProductSeed[] = [
   },
   {
     id: "prod-weekend-short",
-    categoryId: "cat-tshirts",
+    categoryId: "cat-shorts",
     name: "B&C Weekend Short",
     slug: "bc-weekend-short",
     description:
