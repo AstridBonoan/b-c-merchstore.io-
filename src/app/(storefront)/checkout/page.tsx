@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { CheckoutForm } from "@/components/checkout/checkout-form";
+import { CheckoutFormWithSession } from "@/components/checkout/checkout-form-with-session";
 import { Container } from "@/components/layout/container";
 
 export const metadata: Metadata = {
@@ -19,11 +19,11 @@ export default function CheckoutPage() {
           Complete your order
         </h1>
         <p className="mt-2 max-w-xl text-sm text-[#0c0c0c]/60">
-          This GitHub Pages demo validates products locally and completes a safe
-          demo checkout — no real card charges.
+          Enter shipping details and pay with a Stripe test card. On GitHub Pages
+          this runs a secure demo payment in your browser — no real charges.
         </p>
       </div>
-      <CheckoutForm />
+      <CheckoutFormWithSession />
     </Container>
   );
 }

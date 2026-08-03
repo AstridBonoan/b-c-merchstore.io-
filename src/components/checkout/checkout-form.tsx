@@ -3,9 +3,9 @@
 import * as React from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { useForm } from "react-hook-form";
+import { Controller, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Loader2 } from "lucide-react";
+import { CreditCard, Loader2, Lock } from "lucide-react";
 import { buttonVariants, Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -13,7 +13,15 @@ import { Textarea } from "@/components/ui/textarea";
 import { formatPrice } from "@/lib/products/pricing";
 import { useCartStore, useCartSummary } from "@/lib/cart/store";
 import { checkoutSchema, type CheckoutInput } from "@/lib/validation/schemas";
+import {
+  formatCardNumber,
+  formatExpiry,
+  processDemoPayment,
+} from "@/lib/checkout/demo-payment";
+import { placeDemoOrder } from "@/lib/checkout/place-demo-order";
 import { cn } from "@/lib/utils";
+import { withBasePath } from "@/lib/paths";
+import { nanoid } from "nanoid";
 
 type Props = {
   defaultEmail?: string;
@@ -30,6 +38,7 @@ export function CheckoutForm({ defaultEmail = "", defaultName = "" }: Props) {
 
   const {
     register,
+    control,
     handleSubmit,
     formState: { errors },
   } = useForm<CheckoutInput>({
@@ -49,6 +58,12 @@ export function CheckoutForm({ defaultEmail = "", defaultName = "" }: Props) {
         postalCode: "",
         country: "US",
         phone: "",
+      },
+      payment: {
+        cardName: defaultName,
+        cardNumber: "",
+        expiry: "",
+        cvc: "",
       },
     },
   });
@@ -71,46 +86,70 @@ export function CheckoutForm({ defaultEmail = "", defaultName = "" }: Props) {
     setServerError(null);
     setSubmitting(true);
     try {
-      // GitHub Pages static demo: validate against seed catalog in the browser.
-      // No API routes / Stripe secrets are available on static hosting.
-      const { getSeedProductById } = await import("@/lib/products/seed-data");
-      const { canAddToCart } = await import("@/lib/products/inventory");
-      const { summarizeCart } = await import("@/lib/cart/calculations");
-      const { nanoid } = await import("nanoid");
-
-      const validatedLines = [];
-      for (const line of lines) {
-        const product = getSeedProductById(line.productId);
-        const variant = product?.variants?.find((v) => v.id === line.variantId);
-        if (!product?.is_active || !variant?.is_active) {
-          setServerError("One or more products are unavailable.");
-          return;
-        }
-        const stock = canAddToCart(variant.inventory_quantity, line.quantity);
-        if (!stock.allowed) {
-          setServerError(stock.error ?? "Insufficient inventory.");
-          return;
-        }
-        validatedLines.push({
-          ...line,
-          // Prefer canonical seed price over client snapshot.
-          unitPriceCents: variant.price_cents ?? product.price_cents,
+      // Prefer real Stripe Checkout when a server route is available (local/non-static).
+      try {
+        const response = await fetch(withBasePath("/api/checkout"), {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            email: data.email,
+            fullName: data.fullName,
+            phone: data.phone,
+            notes: data.notes,
+            shipping: data.shipping,
+            lines: lines.map((line) => ({
+              productId: line.productId,
+              variantId: line.variantId,
+              quantity: line.quantity,
+            })),
+          }),
         });
+
+        if (response.ok) {
+          const payload = (await response.json()) as {
+            url?: string;
+            error?: string;
+          };
+          if (payload.url) {
+            window.location.assign(payload.url);
+            return;
+          }
+        }
+        // 404 / unavailable → fall through to demo payment (GitHub Pages).
+      } catch {
+        // Network / static hosting — continue with demo payment.
       }
 
-      const summary = summarizeCart(validatedLines);
-      const params = new URLSearchParams({
-        session_id: `demo_${nanoid()}`,
-        email: data.email,
-        total: String(summary.totalCents),
-        demo: "1",
+      const charge = await processDemoPayment(data.payment);
+      if (!charge.ok) {
+        setServerError(charge.error);
+        return;
+      }
+
+      const sessionId = `demo_${nanoid()}`;
+      const placed = placeDemoOrder({
+        checkout: data,
+        lines,
+        sessionId,
+        paymentIntentId: charge.paymentIntentId,
       });
 
+      if (!placed.ok) {
+        setServerError(placed.error);
+        return;
+      }
+
       clearCart();
-      // Next.js router applies basePath automatically for GitHub Pages.
+      const params = new URLSearchParams({
+        session_id: sessionId,
+        order_id: placed.order.id,
+        email: data.email,
+        total: String(placed.order.total_cents),
+        demo: "1",
+      });
       router.push(`/checkout/success/?${params.toString()}`);
     } catch {
-      setServerError("Unable to complete demo checkout. Please try again.");
+      setServerError("Unable to complete checkout. Please try again.");
     } finally {
       setSubmitting(false);
     }
@@ -226,6 +265,105 @@ export function CheckoutForm({ defaultEmail = "", defaultName = "" }: Props) {
           </div>
         </section>
 
+        <section className="space-y-4">
+          <div className="flex items-center justify-between gap-3">
+            <h2 className="font-display text-lg font-semibold">Payment</h2>
+            <span className="inline-flex items-center gap-1.5 text-xs text-[#0c0c0c]/50">
+              <Lock className="size-3.5" aria-hidden="true" />
+              Demo checkout
+            </span>
+          </div>
+          <p className="text-sm text-[#0c0c0c]/60">
+            Use Stripe test card{" "}
+            <span className="font-medium text-[#0c0c0c]">4242 4242 4242 4242</span>,
+            any future expiry, and any CVC.
+          </p>
+          <div className="grid gap-4 sm:grid-cols-2">
+            <div className="space-y-1.5 sm:col-span-2">
+              <Label htmlFor="payment.cardName">Name on card</Label>
+              <Input
+                id="payment.cardName"
+                autoComplete="cc-name"
+                {...register("payment.cardName")}
+              />
+              {errors.payment?.cardName ? (
+                <p className="text-xs text-red-700">{errors.payment.cardName.message}</p>
+              ) : null}
+            </div>
+            <div className="space-y-1.5 sm:col-span-2">
+              <Label htmlFor="payment.cardNumber">Card number</Label>
+              <div className="relative">
+                <CreditCard
+                  className="pointer-events-none absolute left-3 top-1/2 size-4 -translate-y-1/2 text-[#0c0c0c]/35"
+                  aria-hidden="true"
+                />
+                <Controller
+                  control={control}
+                  name="payment.cardNumber"
+                  render={({ field }) => (
+                    <Input
+                      id="payment.cardNumber"
+                      inputMode="numeric"
+                      autoComplete="cc-number"
+                      placeholder="4242 4242 4242 4242"
+                      className="pl-9"
+                      value={field.value}
+                      onChange={(event) =>
+                        field.onChange(formatCardNumber(event.target.value))
+                      }
+                      onBlur={field.onBlur}
+                      name={field.name}
+                      ref={field.ref}
+                    />
+                  )}
+                />
+              </div>
+              {errors.payment?.cardNumber ? (
+                <p className="text-xs text-red-700">{errors.payment.cardNumber.message}</p>
+              ) : null}
+            </div>
+            <div className="space-y-1.5">
+              <Label htmlFor="payment.expiry">Expiry</Label>
+              <Controller
+                control={control}
+                name="payment.expiry"
+                render={({ field }) => (
+                  <Input
+                    id="payment.expiry"
+                    inputMode="numeric"
+                    autoComplete="cc-exp"
+                    placeholder="MM/YY"
+                    value={field.value}
+                    onChange={(event) =>
+                      field.onChange(formatExpiry(event.target.value))
+                    }
+                    onBlur={field.onBlur}
+                    name={field.name}
+                    ref={field.ref}
+                  />
+                )}
+              />
+              {errors.payment?.expiry ? (
+                <p className="text-xs text-red-700">{errors.payment.expiry.message}</p>
+              ) : null}
+            </div>
+            <div className="space-y-1.5">
+              <Label htmlFor="payment.cvc">CVC</Label>
+              <Input
+                id="payment.cvc"
+                inputMode="numeric"
+                autoComplete="cc-csc"
+                placeholder="123"
+                maxLength={4}
+                {...register("payment.cvc")}
+              />
+              {errors.payment?.cvc ? (
+                <p className="text-xs text-red-700">{errors.payment.cvc.message}</p>
+              ) : null}
+            </div>
+          </div>
+        </section>
+
         <section className="space-y-1.5">
           <Label htmlFor="notes">Order notes (optional)</Label>
           <Textarea id="notes" rows={3} {...register("notes")} />
@@ -285,14 +423,14 @@ export function CheckoutForm({ defaultEmail = "", defaultName = "" }: Props) {
           {submitting ? (
             <>
               <Loader2 className="size-4 animate-spin" />
-              Processing…
+              Processing payment…
             </>
           ) : (
-            "Pay with Stripe"
+            `Pay ${formatPrice(summary.totalCents)}`
           )}
         </Button>
         <p className="text-center text-xs text-[#0c0c0c]/50">
-          Demo/test mode supported. No real charges without live Stripe keys.
+          No real charges on the GitHub Pages demo. Card details stay in your browser.
         </p>
       </aside>
     </form>

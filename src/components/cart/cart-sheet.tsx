@@ -9,10 +9,11 @@ import {
   SheetHeader,
   SheetTitle,
 } from "@/components/ui/sheet";
-import { Button, buttonVariants } from "@/components/ui/button";
+import { buttonVariants } from "@/components/ui/button";
 import { ProductImage } from "@/components/products/product-image";
 import { formatPrice } from "@/lib/products/pricing";
 import { useCartStore, useCartSummary } from "@/lib/cart/store";
+import { cn } from "@/lib/utils";
 
 export function CartSheet() {
   const isOpen = useCartStore((state) => state.isOpen);
@@ -128,9 +129,13 @@ export function CartSheet() {
               <p className="text-xs text-[#0c0c0c]/50">
                 Shipping and taxes calculated at checkout.
               </p>
-              <Button type="button" size="lg" disabled title="Checkout is coming soon">
-                Checkout — coming soon
-              </Button>
+              <Link
+                href="/checkout/"
+                onClick={() => setOpen(false)}
+                className={cn(buttonVariants({ size: "lg" }), "w-full")}
+              >
+                Checkout
+              </Link>
               <Link
                 href="/shop"
                 onClick={() => setOpen(false)}

@@ -69,6 +69,25 @@ export const checkoutSchema = z.object({
   billingSameAsShipping: z.boolean(),
   billing: addressSchema.optional(),
   notes: z.string().trim().max(500).optional().or(z.literal("")),
+  payment: z.object({
+    cardName: z.string().trim().min(2, "Name on card is required."),
+    cardNumber: z
+      .string()
+      .trim()
+      .min(13, "Enter a valid card number.")
+      .refine((value) => {
+        const digits = value.replace(/\D/g, "");
+        return digits.length >= 13 && digits.length <= 19;
+      }, "Enter a valid card number."),
+    expiry: z
+      .string()
+      .trim()
+      .regex(/^\d{2}\/\d{2}$/, "Use MM/YY format."),
+    cvc: z
+      .string()
+      .trim()
+      .regex(/^\d{3,4}$/, "Enter a 3 or 4 digit CVC."),
+  }),
 });
 
 export const productAdminSchema = z.object({

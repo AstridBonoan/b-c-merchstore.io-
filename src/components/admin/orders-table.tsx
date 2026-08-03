@@ -79,7 +79,7 @@ export function OrdersTable({ orders }: OrdersTableProps) {
               <tr key={order.id} className="align-middle">
                 <td className="whitespace-nowrap px-4 py-3">
                   <Link
-                    href={`/admin/orders/${order.id}`}
+                    href={`/admin/orders/view/?id=${encodeURIComponent(order.id)}`}
                     className="font-medium text-[#0d5c63] hover:underline"
                   >
                     #{order.id.replace("ord-", "")}

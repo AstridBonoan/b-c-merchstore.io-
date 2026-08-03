@@ -85,8 +85,8 @@ export async function createCheckoutSession(
       })),
       success_url:
         params.successUrl ??
-        `${siteUrl}/checkout/success?session_id={CHECKOUT_SESSION_ID}`,
-      cancel_url: params.cancelUrl ?? `${siteUrl}/cart`,
+        `${siteUrl}/checkout/success/?session_id={CHECKOUT_SESSION_ID}`,
+      cancel_url: params.cancelUrl ?? `${siteUrl}/checkout/cancel/`,
       metadata: {
         user_id: params.userId ?? "",
         subtotal_cents: String(summary.subtotalCents),
