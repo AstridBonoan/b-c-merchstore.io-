@@ -45,14 +45,25 @@ export function ProductFilters({
   const [prevUrlSearch, setPrevUrlSearch] = React.useState(urlSearch);
   const searchDebounce = React.useRef<ReturnType<typeof setTimeout> | null>(null);
 
+  // Align the sidebar field with URL updates from nav search (render-time sync).
   if (urlSearch !== prevUrlSearch) {
     setPrevUrlSearch(urlSearch);
     setSearchValue(urlSearch);
+  }
+
+  // Cancel pending debounced URL writes when the query changes from outside.
+  React.useEffect(() => {
     if (searchDebounce.current) {
       clearTimeout(searchDebounce.current);
       searchDebounce.current = null;
     }
-  }
+  }, [urlSearch]);
+
+  React.useEffect(() => {
+    return () => {
+      if (searchDebounce.current) clearTimeout(searchDebounce.current);
+    };
+  }, []);
 
   const category = searchParams.get("category") ?? "";
   const sort = (searchParams.get("sort") as ProductSortOption | null) ?? "featured";
