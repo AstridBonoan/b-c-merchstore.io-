@@ -76,7 +76,9 @@ export function CheckoutForm({ defaultEmail = "", defaultName = "" }: Props) {
       const { getSeedProductById } = await import("@/lib/products/seed-data");
       const { canAddToCart } = await import("@/lib/products/inventory");
       const { summarizeCart } = await import("@/lib/cart/calculations");
+      const { nanoid } = await import("nanoid");
 
+      const validatedLines = [];
       for (const line of lines) {
         const product = getSeedProductById(line.productId);
         const variant = product?.variants?.find((v) => v.id === line.variantId);
@@ -89,13 +91,16 @@ export function CheckoutForm({ defaultEmail = "", defaultName = "" }: Props) {
           setServerError(stock.error ?? "Insufficient inventory.");
           return;
         }
-        // Prefer canonical seed price over client snapshot.
-        line.unitPriceCents = variant.price_cents ?? product.price_cents;
+        validatedLines.push({
+          ...line,
+          // Prefer canonical seed price over client snapshot.
+          unitPriceCents: variant.price_cents ?? product.price_cents,
+        });
       }
 
-      const summary = summarizeCart(lines);
+      const summary = summarizeCart(validatedLines);
       const params = new URLSearchParams({
-        session_id: `demo_${Date.now()}`,
+        session_id: `demo_${nanoid()}`,
         email: data.email,
         total: String(summary.totalCents),
         demo: "1",
