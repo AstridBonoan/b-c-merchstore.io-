@@ -146,13 +146,9 @@ export function CheckoutForm({ defaultEmail = "", defaultName = "" }: Props) {
         totalCents: placed.order.total_cents,
         isDemo: true,
       });
-      // Hard navigate with order id in the query; confirmation also reads
-      // sessionStorage as a backup if the query is stripped.
-      window.location.assign(
-        withBasePath(
-          `/checkout/success/?id=${encodeURIComponent(placed.order.id)}`,
-        ),
-      )
+      // No query string — ?id= on this route crashes Next hydration on Pages.
+      // Order id lives in sessionStorage for confirmation + View order.
+      window.location.assign(withBasePath("/checkout/success/"));
     } catch {
       setServerError("Unable to complete checkout. Please try again.");
     } finally {
