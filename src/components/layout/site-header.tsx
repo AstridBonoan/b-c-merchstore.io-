@@ -19,15 +19,25 @@ const NAV_LINKS = [
   { href: "/contact", label: "Contact" },
 ];
 
+function useIsClient() {
+  return React.useSyncExternalStore(
+    () => () => undefined,
+    () => true,
+    () => false,
+  );
+}
+
 export function SiteHeader() {
   const pathname = usePathname() ?? "";
+  const isClient = useIsClient();
   const [scrolled, setScrolled] = React.useState(false);
   const [mobileOpen, setMobileOpen] = React.useState(false);
-  const [lastPathname, setLastPathname] = React.useState(pathname);
   const itemCount = useCartStore((state) =>
     state.lines.reduce((sum, line) => sum + line.quantity, 0),
   );
   const toggleCart = useCartStore((state) => state.toggleOpen);
+  // Avoid hydration mismatch from zustand persist rehydrating after paint.
+  const badgeCount = isClient ? itemCount : 0;
 
   React.useEffect(() => {
     function onScroll() {
@@ -37,11 +47,6 @@ export function SiteHeader() {
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
-
-  if (pathname !== lastPathname) {
-    setLastPathname(pathname);
-    setMobileOpen(false);
-  }
 
   return (
     <>
@@ -100,13 +105,13 @@ export function SiteHeader() {
             <button
               type="button"
               onClick={toggleCart}
-              aria-label={`Open bag${itemCount > 0 ? `, ${itemCount} items` : ""}`}
+              aria-label={`Open bag${badgeCount > 0 ? `, ${badgeCount} items` : ""}`}
               className="relative inline-flex size-10 items-center justify-center rounded-md text-[#0c0c0c]/80 transition-colors hover:bg-[#0c0c0c]/5 hover:text-[#0c0c0c]"
             >
               <ShoppingBag className="size-[18px]" aria-hidden="true" />
-              {itemCount > 0 ? (
+              {badgeCount > 0 ? (
                 <span className="absolute right-1 top-1 flex size-4 items-center justify-center rounded-full bg-[#0d5c63] text-[10px] font-semibold text-white">
-                  {itemCount > 9 ? "9+" : itemCount}
+                  {badgeCount > 9 ? "9+" : badgeCount}
                 </span>
               ) : null}
             </button>

@@ -44,7 +44,7 @@ export default function CheckoutSuccessPage() {
         : "Thank you — your order confirmation is ready.";
     }
     if (viewEl && data.orderId) {
-      viewEl.setAttribute("href", base + "/account/orders/view/?id=" + encodeURIComponent(String(data.orderId)));
+      viewEl.setAttribute("href", base + "/order/?id=" + encodeURIComponent(String(data.orderId)));
     }
   } catch (e) {}
 })();`;
@@ -105,13 +105,14 @@ export default function CheckoutSuccessPage() {
         </dl>
 
         <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:justify-center">
-          <Link
+          {/* Plain <a> so the fill script can set ?id= and we avoid soft-routing. */}
+          <a
             id="cs-view-order"
-            href="/account/orders/"
+            href={`${basePath}/order/`}
             className={cn(buttonVariants())}
           >
             View order
-          </Link>
+          </a>
           <Link href="/shop/" className={cn(buttonVariants({ variant: "outline" }))}>
             Continue shopping
           </Link>

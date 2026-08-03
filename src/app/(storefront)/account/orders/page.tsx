@@ -53,7 +53,7 @@ function OrdersList({ email }: { email: string }) {
           {orders.map((order) => (
             <li key={order.id}>
               <Link
-                href={`/account/orders/view/?id=${encodeURIComponent(order.id)}`}
+                href={`/order/?id=${encodeURIComponent(order.id)}`}
                 className="flex flex-col gap-2 px-5 py-4 transition hover:bg-[#0c0c0c]/[0.02] sm:flex-row sm:items-center sm:justify-between"
               >
                 <div>
