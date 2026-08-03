@@ -18,6 +18,7 @@ import {
   processDemoPayment,
 } from "@/lib/checkout/demo-payment";
 import { placeDemoOrder } from "@/lib/checkout/place-demo-order";
+import { saveCheckoutSuccess } from "@/lib/checkout/success-storage";
 import { cn } from "@/lib/utils";
 import { withBasePath } from "@/lib/paths";
 import { nanoid } from "nanoid";
@@ -138,18 +139,16 @@ export function CheckoutForm({ defaultEmail = "", defaultName = "" }: Props) {
       }
 
       clearCart();
-      const params = new URLSearchParams({
-        session_id: sessionId,
-        order_id: placed.order.id,
+      saveCheckoutSuccess({
+        sessionId,
+        orderId: placed.order.id,
         email: data.email,
-        total: String(placed.order.total_cents),
-        demo: "1",
+        totalCents: placed.order.total_cents,
+        isDemo: true,
       });
-      // Full navigation so GitHub Pages static hosting loads /checkout/success
-      // reliably (client soft-routing often shows "This page couldn't load").
-      window.location.assign(
-        withBasePath(`/checkout/success/?${params.toString()}`),
-      );
+      // Navigate without query params — Next on GitHub Pages often drops them
+      // during hydration, which left the confirmation page stuck on loading.
+      window.location.assign(withBasePath("/checkout/success/"));
     } catch {
       setServerError("Unable to complete checkout. Please try again.");
     } finally {
