@@ -20,7 +20,7 @@ const NAV_LINKS = [
 ];
 
 export function SiteHeader() {
-  const pathname = usePathname();
+  const pathname = usePathname() ?? "";
   const [scrolled, setScrolled] = React.useState(false);
   const [mobileOpen, setMobileOpen] = React.useState(false);
   const [lastPathname, setLastPathname] = React.useState(pathname);

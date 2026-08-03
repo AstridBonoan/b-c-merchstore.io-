@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import Script from "next/script";
 import Link from "next/link";
 import { Container } from "@/components/layout/container";
 import { buttonVariants } from "@/components/ui/button";
@@ -12,11 +11,6 @@ export const metadata: Metadata = {
   robots: { index: false, follow: false },
 };
 
-/**
- * Mostly static confirmation page for GitHub Pages.
- * Details are filled from sessionStorage via a tiny after-interactive script
- * so the "Payment successful" UI is visible even if React hydration fails.
- */
 export default function CheckoutSuccessPage() {
   const basePath = getBasePath();
   const fillScript = `
@@ -29,15 +23,9 @@ export default function CheckoutSuccessPage() {
     var refEl = document.getElementById("cs-ref");
     var emailEl = document.getElementById("cs-email");
     var totalEl = document.getElementById("cs-total");
-    var statusEl = document.getElementById("cs-status");
     var msgEl = document.getElementById("cs-msg");
     var viewEl = document.getElementById("cs-view-order");
-    if (!raw) {
-      if (msgEl) {
-        msgEl.textContent = "If you just checked out, open Order history to confirm — or return to the shop.";
-      }
-      return;
-    }
+    if (!raw) return;
     var data = JSON.parse(raw);
     function money(cents) {
       try {
@@ -50,7 +38,6 @@ export default function CheckoutSuccessPage() {
     if (refEl && data.sessionId) refEl.textContent = String(data.sessionId);
     if (emailEl && data.email) emailEl.textContent = String(data.email);
     if (totalEl && data.totalCents != null) totalEl.textContent = money(data.totalCents);
-    if (statusEl) statusEl.textContent = "paid";
     if (msgEl) {
       msgEl.textContent = data.isDemo
         ? "Demo payment completed. Your order is saved in this browser — no real charge was made."
@@ -113,9 +100,7 @@ export default function CheckoutSuccessPage() {
           </div>
           <div className="flex justify-between gap-4">
             <dt className="text-[#0c0c0c]/55">Status</dt>
-            <dd id="cs-status" className="font-medium capitalize">
-              paid
-            </dd>
+            <dd className="font-medium capitalize">paid</dd>
           </div>
         </dl>
 
@@ -133,9 +118,7 @@ export default function CheckoutSuccessPage() {
         </div>
       </div>
 
-      <Script id="checkout-success-fill" strategy="afterInteractive">
-        {fillScript}
-      </Script>
+      <script dangerouslySetInnerHTML={{ __html: fillScript }} />
     </Container>
   );
 }
